@@ -1,10 +1,7 @@
-package com.maps.GoogleAPI;
-
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-
 
 public class Distance {
     private static final String API_KEY = "AIzaSyBMLdQm4ZQ217hYicRS4vtukNSCPBuMt4o";
@@ -70,5 +67,3 @@ public class Distance {
         distance.getDistance(kms, "text");
     }
 }
-
-
