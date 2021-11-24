@@ -10,7 +10,6 @@ public class Distance {
     private static final String API_KEY = "AIzaSyBMLdQm4ZQ217hYicRS4vtukNSCPBuMt4o";
     private static String city1 = "";
     private static String city2 = "";
-    public static String city = "Cartago";
 
     public static String getDistanceData() throws Exception {
         var url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + city1 + "&destinations=" + city2 + "&key=" + API_KEY;
