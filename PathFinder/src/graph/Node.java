@@ -1,4 +1,7 @@
+package graph;
+
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Node {
     private String city;
@@ -7,6 +10,8 @@ public class Node {
     private ArrayList<String> restaurants;
     private ArrayList<String> gasStations;
     private ArrayList<Edge> edges = new ArrayList<>();
+    private LinkedList<Node> shortestPath = new LinkedList<>();
+    private double distance = Double.POSITIVE_INFINITY;
 
     /**
      * Constructor that creates a vertex with a city name and information
@@ -63,10 +68,11 @@ public class Node {
     }
 
     /**
-     * 
+     * Method to add an edge from this vertex to another
+     * @param node vertex to point to 
      */
     public void addEdgeTo(Node node) {
-        edges.add(new Edge(this, node));
+        this.edges.add(new Edge(this, node));
     }
 
     /**
@@ -75,5 +81,59 @@ public class Node {
      */
     public ArrayList<Edge> getEdges() {
         return this.edges;
+    }
+
+    /**
+     * Method to get the weight of an edge to a given vertex
+     * @param Node vertex to get the weight of 
+     */
+    public double getEdgeWeightTo(Node node) {
+        double weight = 0.0;
+        for (Edge edge : this.edges) {
+            if (edge.getDestination() == node) {
+                weight = edge.getDistance();
+            }
+        }
+        return weight;
+    }
+
+    /**
+     * Method to get a list of vertexes adjacent to this one
+     * @return ArrayList of nodes
+     */
+    public ArrayList<Node> getAdjacents() {
+        ArrayList<Node> nodes = new ArrayList<Node>();
+        for (Edge edge : edges) {
+            nodes.add(edge.getDestination());
+        }
+        return nodes;
+    }
+
+    /**
+     * Method to set a shorest path to this vertex calculed with the Dijkstra algorithm
+     * @param shortestPath shorestPath to this node from a given source
+     */
+    public void setShortestPath(LinkedList<Node> shortestPath) {
+        this.shortestPath = shortestPath;
+    }
+
+    /**
+     * Method to set a shorest path to this vertex
+     * @return shorestPath to this node
+     */
+    public LinkedList<Node> getShortestPath() {
+        return this.shortestPath;
+    }
+
+    /**
+     * 
+     * @param distance
+     */
+    public void setDistance(double distance) {
+        this.distance = distance;
+    }
+
+    public double getDistance() {
+        return this.distance;
     }
 }
