@@ -132,6 +132,7 @@ public class UserInterface extends JFrame{
         // Botones
         this.calculate.setBounds(10, 250, 110, 30);
         this.calculate.addActionListener(action -> this.calculateDistance());
+        this.calculate.setEnabled(false);
 
         this.helpButton.setBounds(10, 460, 150, 30);
         this.helpButton.addActionListener(e -> {
