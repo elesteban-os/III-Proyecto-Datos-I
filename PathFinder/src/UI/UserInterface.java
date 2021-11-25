@@ -22,7 +22,6 @@ public class UserInterface extends JFrame{
         }
     };
 
-
     private String[] places = {"San José", "Alajuelita", "Escazú", "Desamparados", "Puriscal", "Tarrazú", "Aserrí", "Goicoechea", 
                                "Santa Ana", "Colorado", "Acosta", "Tibás", "Montes de Oca", "Pérez Zeledón", "Curridabat"};
     //                       1    2    3    4    5    6    7    8    9    10   11   12   13   14   15
@@ -42,13 +41,6 @@ public class UserInterface extends JFrame{
             this.drawing.drawCircles(g, this.xPlaces[i], this.yPlaces[i], color); 
         }
     }    
-
-    //dhjsjdhgagshjk
-    ActionListener colors = new ActionListener(){
-        public void actionPerformed(ActionEvent event){
-            drawing.drawCircles(paper.getGraphics(), 100, 100, Color.BLUE);
-        }
-    };
 
     public UserInterface() {
         // ComboBox
@@ -92,8 +84,6 @@ public class UserInterface extends JFrame{
         this.window.setResizable(false);
         this.window.setVisible(true);
     }
-
-    
 
     public static void main(String[] args){
         UserInterface user = new UserInterface();

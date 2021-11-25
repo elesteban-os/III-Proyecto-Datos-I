@@ -18,19 +18,25 @@ public class Distance {
         return response;
     }
 
-    public void getDistance(String json, String searching){
+    public String getDistance(String json, String searching){
         String[] words = json.split(" ");
         int n = 0;
+        StringBuilder result = new StringBuilder();
         for(String p : words){
             if (n == 2){
                 String[] letters = p.split("");
-                StringBuilder result = new StringBuilder();
+                
+                boolean lastDigit = false;
                 for(String c : letters){
                     if (c.contains("\"")){
                         continue;
+                    } else if (lastDigit){
+                        result.append(c);
+                        System.out.println(result.toString());
+                        break;
                     } else if (c.contains(".")) {
-                        System.out.println(result);
-                        break;                        
+                        result.append(c);
+                        lastDigit = true;                       
                     } else {
                         result.append(c);
                     }
@@ -40,6 +46,7 @@ public class Distance {
                 n++;
             }
         }
+        return result.toString();
     }
 
     public String getCity1() {
@@ -65,6 +72,7 @@ public class Distance {
 
         String kms = getDistanceData();
         System.out.println(kms);
-        distance.getDistance(kms, "text");
+        String distancia = distance.getDistance(kms, "text");
+        double distDou = Double.parseDouble(distancia);
     }
 }
