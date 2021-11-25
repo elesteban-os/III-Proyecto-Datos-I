@@ -10,7 +10,7 @@ public class Dijkstra {
      * @param destination node to get to
      * @returns LinkedLlist with the shortest path from source to destination
      */
-    public LinkedList<Node> getShorestPath(Node source, Node destination, double delay) {
+    public LinkedList<Node> getShortestPath(Node source, Node destination, double delay) {
         source.setDistance(0.0);
         ArrayList<Node> settledNodes = new ArrayList<>();
         ArrayList<Node> unsettledNodes = new ArrayList<>();
