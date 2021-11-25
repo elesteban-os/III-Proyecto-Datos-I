@@ -4,67 +4,28 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Node {
-    private String city;
-    private int population;
-    private ArrayList<String> placesOfInterest;
-    private ArrayList<String> restaurants;
-    private ArrayList<String> gasStations;
-    private ArrayList<Edge> edges = new ArrayList<>();
-    private LinkedList<Node> shortestPath = new LinkedList<>();
+    private City city;
+    private ArrayList<Edge> edges = new ArrayList<Edge>();
+    private LinkedList<Node> path = new LinkedList<Node>();
     private double distance = Double.POSITIVE_INFINITY;
 
     /**
-     * Constructor that creates a vertex with a city name and information
-     * @param city name of the city
+     * Constructor that creates a vertex with a city
+     * @param city city in this vertex
      * @param placesOfInterest list of places of interests in this city
      * @param restaurants list of restaurants in this city
      * @param gasStations list of gas stations in this city
      */
-    public Node(String city, int population, ArrayList<String> placesOfInterest, ArrayList<String> restaurants, ArrayList<String> gasStations) {
+    public Node(City city) {
         this.city = city;
-        this.placesOfInterest = placesOfInterest;
-        this.restaurants = restaurants;
-        this.gasStations = gasStations;
     }
 
     /**
-     * Getter for the name of the city in this vertex
-     * @return name of this city
+     * Getter for the city in this vertex
+     * @return City of this node
      */
-    public String getCity() {
+    public City getCity() {
         return this.city;
-    }
-
-    /**
-     * Getter for the population of the city in this vertex
-     * @return population of this city
-     */
-    public int getPopulation() {
-        return this.population;
-    }
-
-    /**
-     * Getter for the places of interest in the city in this vertex
-     * @return places of interest in this city
-     */
-    public ArrayList<String> getPlacesOfInterest() {
-        return this.placesOfInterest;
-    }
-
-    /**
-     * Getter for the restaurants in the city in this vertex
-     * @return restaurants in this city
-     */
-    public ArrayList<String> getRestaurants() {
-        return this.restaurants;
-    }
-
-    /**
-     * Getter for the gas stations in the city in this vertex
-     * @return gas stations in this city
-     */
-    public ArrayList<String> getGasStations() {
-        return this.gasStations;
     }
 
     /**
@@ -85,13 +46,16 @@ public class Node {
 
     /**
      * Method to get the weight of an edge to a given vertex
-     * @param Node vertex to get the weight of 
+     * @param node vertex to get the weight of 
      */
     public double getEdgeWeightTo(Node node) {
         double weight = 0.0;
-        for (Edge edge : this.edges) {
-            if (edge.getDestination() == node) {
-                weight = edge.getDistance();
+        if (node != this) {
+            weight = Double.POSITIVE_INFINITY;
+            for (Edge edge : this.edges) {
+                if (edge.getDestination() == node) {
+                    weight = edge.getWeight();
+                }
             }
         }
         return weight;
@@ -110,29 +74,33 @@ public class Node {
     }
 
     /**
-     * Method to set a shorest path to this vertex calculed with the Dijkstra algorithm
-     * @param shortestPath shorestPath to this node from a given source
+     * Setter for the shorest path to this vertex
+     * @param path LinkedList with the shorest path to this node from a given source calculed with the Dijkstra algorithm
      */
-    public void setShortestPath(LinkedList<Node> shortestPath) {
-        this.shortestPath = shortestPath;
+    public void setPath(LinkedList<Node> path) {
+        this.path = path;
     }
 
     /**
-     * Method to set a shorest path to this vertex
-     * @return shorestPath to this node
+     * Getter for the shorest path to this vertex
+     * @return LinkedList with the nodes in the shorest path to this node
      */
-    public LinkedList<Node> getShortestPath() {
-        return this.shortestPath;
+    public LinkedList<Node> getPath() {
+        return this.path;
     }
 
     /**
-     * 
-     * @param distance
+     * Setter for the distance to this node
+     * @param distance double with the distance to set
      */
     public void setDistance(double distance) {
         this.distance = distance;
     }
 
+    /**
+     * Getter for the distance to this node
+     * @return distance to this node
+     */
     public double getDistance() {
         return this.distance;
     }

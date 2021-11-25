@@ -1,29 +1,41 @@
 package graph;
 
-import maps.Distance;
+import GoogleAPI.Distance;
 
 public class Edge {
-    private Node source;
+    private Node origin;
     private Node destination;
-    private double distance;
+    private double time;
 
     /**
      * Constructor to create an edge pointing from one vertex to another
-     * @param source node where the edge starts
+     * @param origin node where the edge starts
      * @param destination node where the edge points
+     * @throws Exception
      */
-    public Edge(Node source, Node destination) {
-        this.source = source;
+    public Edge(Node origin, Node destination) {
+        this.origin = origin;
         this.destination = destination;
-        this.distance = Double.MAX_VALUE;
+        Distance api = new Distance();
+        api.setCity1(origin.getCity().getName());
+        api.setCity2(destination.getCity().getName());
+        String kms;
+        try {
+            kms = api.getDistance(Distance.getDistanceData(), "text");
+        } catch (Exception e) {
+            kms = "0.0";
+            e.printStackTrace();
+        }
+        double distance = Double.parseDouble(kms);
+        this.time = distance/80;
     }
 
     /**
      * Getter for the staring vertex of the edge
      * @returns starting node of the edge
      */
-    public Node getSource() {
-        return this.source;
+    public Node getOrigin() {
+        return this.origin;
     }
 
     /**
@@ -36,9 +48,9 @@ public class Edge {
 
     /**
      * Getter for the weight of the edge
-     * @returns distance of the edge
+     * @returns time of the edge
      */
-    public double getDistance() {
-        return this.distance;
+    public double getWeight() {
+        return this.time;
     }
 }
