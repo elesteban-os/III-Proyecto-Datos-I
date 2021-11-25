@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-import data.Data;
+import info.Data;
 import graph.City;
 import graph.Graph;
 import graph.Dijkstra;
@@ -16,13 +16,24 @@ import graph.Node;
 public class UserInterface extends JFrame{
     
     private JFrame window = new JFrame("Path Finder");
+    private JLabel kms = new JLabel(); 
     private JLabel map = new JLabel();
     private JLabel title = new JLabel();
     private JLabel origen = new JLabel();
     private JLabel destino = new JLabel();
+    private JLabel kmsTitle = new JLabel();
+    private JLabel helpLabel = new JLabel();
+    private JButton calculate = new JButton("Calcular");
+    private JButton helpButton = new JButton("Consultar");
     private Draw drawing = new Draw();
     private Data data = new Data();
+<<<<<<< HEAD
     private City[] cities = new City[15];
+=======
+    private City[] cities;
+    private SpinnerNumberModel modelSpinner = new SpinnerNumberModel(0, 0, 60, 1);
+    private JSpinner delay = new JSpinner(modelSpinner);
+>>>>>>> 41bd77f34949974042a26597833f5fd9b8628d24
     private Graph graph;
     private Dijkstra calculator = new Dijkstra();
     
@@ -43,8 +54,8 @@ public class UserInterface extends JFrame{
                             
     private JComboBox<String> city1 = new JComboBox<>(places);
     private JComboBox<String> city2 = new JComboBox<>(places);
+    private JComboBox<String> help = new JComboBox<>(places);
 
-    private JButton calculate = new JButton("Calcular");
 
     public void drawNodes(Graphics g, Color color){
         int len = this.xPlaces.length;
@@ -88,14 +99,14 @@ public class UserInterface extends JFrame{
         // ComboBox
         this.city1.setBounds(10, 120, 150, 30);
         this.city2.setBounds(10, 210, 150, 30);
+        this.help.setBounds(10, 400, 150, 30);
 
         // Botones
-        this.calculate.setBounds(10, 250, 150, 30);
-        //this.calculate.addActionListener(colors);
+        this.calculate.setBounds(10, 250, 110, 30);
 
         // Labels
         this.title.setText("PATH FINDER");
-        this.title.setBounds(10, 10, 300, 40);
+        this.title.setBounds(5, 10, 330, 40);
         this.title.setFont(new Font("Bahnschrift", Font.PLAIN, 40));
 
         this.origen.setText("Origen");
@@ -106,23 +117,38 @@ public class UserInterface extends JFrame{
         this.destino.setBounds(10, 180, 100, 40);
         this.destino.setFont(new Font("Bahnschrift", Font.PLAIN, 20));
 
+        this.kmsTitle.setText("Distancia");
+        this.kmsTitle.setBounds(10, 300, 100, 40);
+        this.kmsTitle.setFont(new Font("Bahnschrift", Font.PLAIN, 20));
+
+        this.kms.setText("0.0 KM");
+        this.kms.setBounds(10, 320, 100, 40);
+        this.kms.setFont(new Font("Bahnschrift", Font.PLAIN, 20));
+
         // Paper
         this.paper.setBounds(250, 0, 1000, 720);
+
+        // Spinner
+        this.delay.setBounds(120, 250, 40, 30);
 
         // Add          
         this.window.add(this.paper);
         this.window.add(this.city1);
         this.window.add(this.city2);
+        this.window.add(this.help);
+        this.window.add(this.delay);
         this.window.add(this.map);
         this.window.add(this.title);
+        this.window.add(this.kmsTitle);
+        this.window.add(this.kms);
         this.window.add(this.origen);
         this.window.add(this.destino);
         this.window.add(this.calculate);
 
-       // Window
+        // Window
         this.window.setDefaultCloseOperation(window.EXIT_ON_CLOSE);
         this.window.setLayout(null);
-        this.window.setSize(1000, 720);
+        this.window.setSize(850, 640);
         this.window.setResizable(false);
         this.window.setVisible(true);
     }
