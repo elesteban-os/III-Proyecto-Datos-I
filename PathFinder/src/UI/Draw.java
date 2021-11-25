@@ -20,7 +20,6 @@ public class Draw extends JPanel {
     public void drawCircles(Graphics g, int x, int y, Color color){
         g.setColor(color);
         g.fillOval(x, y, 10, 10);   
-         
     }
 
     /**
