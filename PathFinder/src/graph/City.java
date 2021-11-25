@@ -5,7 +5,7 @@ public class City {
     private String placesOfInterest;
     private String restaurants;
     private String gasStations;
-    private int place;
+    private double place;
     
     /**
      * Constructor that creates a vertex with a city
@@ -51,7 +51,7 @@ public class City {
         char[] chars = lowered.toCharArray();
         int e = 0;
         for (char c : chars) {
-            int add;
+            double add;
             switch (c) {
                 case 'a', 'á' -> add = 1;
                 case 'b' -> add = 2;
@@ -81,18 +81,19 @@ public class City {
                 case 'z' -> add = 26;
                 default -> add = 0;
             }
-            this.place += add * Math.pow(10,e);
+            this.place += add * Math.pow(10,-e);
             if (add != 0) {
-                e++;
+                e += 2;
             }
         }
+        System.out.println(this.name + ":" + this.place);
     }
 
     /**
      * Getter for the place to position the node containing this city
      * @return integer with the priority
      */
-    public int getPlace() {
+    public double getPlace() {
         return this.place;
     }
 }

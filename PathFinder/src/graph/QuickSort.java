@@ -1,19 +1,21 @@
 package graph;
 
-import java.util.ArrayList;
-
 public class QuickSort {
-    private ArrayList<Node> nodes = new ArrayList<Node>();
+    private City[] cities;
 
     /**
-     * Method to sort alphabetically an ArrayList of nodes
-     * @param nodes ArrayList of nodes to sort
-     * @returns sorted ArrayList
+     * Method to sort alphabetically an array of cities
+     * @param cities array of cities to sort
+     * @returns sorted array of the names of the cities
      */
-    public ArrayList<Node> sort(ArrayList<Node> nodes) {
-        this.nodes = nodes;
-        this.quickSort(0, nodes.size() - 1);
-        return this.nodes;
+    public String[] sort(City[] cities) {
+        this.cities = cities;
+        this.quickSort(0, cities.length - 1);
+        String[] names = new String[15];
+        for (int i = 0; i < cities.length; i++) {
+            names[i] = this.cities[i].getName();
+        }
+        return names;
     }
 
     /**
@@ -23,18 +25,18 @@ public class QuickSort {
      */
     private void quickSort(int low, int high) {
         int i = low, j = high;
-        int pivot = this.nodes.get(i).getCity().getPlace();
+        double pivot = this.cities[i].getPlace();
         while (i <= j) {
-            while (this.nodes.get(i).getCity().getPlace() > pivot) {
+            while (this.cities[i].getPlace() < pivot) {
                 i++;
             }
-            while (this.nodes.get(j).getCity().getPlace() < pivot) {
+            while (this.cities[j].getPlace() > pivot) {
                 j--;
             }
             if (i <= j) {
-                Node temp = this.nodes.get(i);
-                this.nodes.set(i, this.nodes.get(j));
-                this.nodes.set(j, temp);
+                City temp = this.cities[i];
+                this.cities[i] = this.cities[j];
+                this.cities[j] = temp;
                 i++;
                 j--;
             }
