@@ -71,7 +71,7 @@ public class UserInterface extends JFrame{
         }
     }
 
-    public void calulateDistance() {
+    public void calculateDistance() {
         Node origin = graph.getNode("San José");
         Node destiny = graph.getNode("Curridabat");
         LinkedList<Node> path = this.calculator.getShortestPath(origin, destiny, 0);
@@ -90,7 +90,7 @@ public class UserInterface extends JFrame{
 
     public UserInterface() {
         setCities();
-        //this.graph = new Graph(this.cities, this.xPlaces, this.yPlaces, this.data.getMatrix());
+        this.graph = new Graph(this.cities, this.xPlaces, this.yPlaces, this.data.getMatrix());
 
         // ComboBox
         this.city1.setBounds(10, 120, 150, 30);
@@ -99,6 +99,7 @@ public class UserInterface extends JFrame{
 
         // Botones
         this.calculate.setBounds(10, 250, 110, 30);
+        this.calculate.addActionListener(action -> this.calculateDistance());
 
         this.helpButton.setBounds(10, 440, 150, 30);
         this.helpButton.addActionListener(e -> {

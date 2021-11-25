@@ -47,10 +47,14 @@ public class Dijkstra {
         Node closestNode = null;
         double lowestDistance = Double.POSITIVE_INFINITY;
         for (Node node: unsettledNodes) {
-            double nodeDistance = currentNode.getEdgeWeightTo(node) + delay;
-            if (nodeDistance < lowestDistance) {
-                lowestDistance = nodeDistance;
-                closestNode = node;
+            if (currentNode != node) {
+                double nodeDistance = currentNode.getEdgeWeightTo(node) + delay;
+                if (nodeDistance < lowestDistance) {
+                    lowestDistance = nodeDistance;
+                    closestNode = node;
+                }
+            } else {
+                closestNode = currentNode;
             }
         }
         return closestNode;
