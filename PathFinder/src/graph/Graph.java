@@ -1,6 +1,7 @@
 package graph;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Graph {
     private ArrayList<Node> nodes = new ArrayList<Node>();
@@ -48,5 +49,12 @@ public class Graph {
             }
         }
         return result;
+    }
+
+    public void resetNodes() {
+        for (Node node : this.nodes) {
+            node.setTime(Double.POSITIVE_INFINITY);
+            node.setPath(new LinkedList<Node>());
+        }
     }
 }
