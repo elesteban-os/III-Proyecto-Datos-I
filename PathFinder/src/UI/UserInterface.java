@@ -121,9 +121,9 @@ public class UserInterface extends JFrame{
 
     public UserInterface() {
         this.setCities();
+        this.graph = new Graph(this.cities, this.xPlaces, this.yPlaces, this.data.getMatrix());
         this.sortedPlaces = this.sorter.sort(this.cities);
         this.help = new JComboBox<>(sortedPlaces);
-        this.graph = new Graph(this.cities, this.xPlaces, this.yPlaces, this.data.getMatrix());
 
         // ComboBox
         this.city1.setBounds(10, 120, 150, 30);
@@ -136,9 +136,7 @@ public class UserInterface extends JFrame{
         this.calculate.setEnabled(false);
 
         this.helpButton.setBounds(10, 460, 150, 30);
-        this.helpButton.addActionListener(e -> {
-            openJOptionPane();
-        });
+        this.helpButton.addActionListener(e -> this.openJOptionPane());
 
         // Labels
         this.title.setText("PATH FINDER");

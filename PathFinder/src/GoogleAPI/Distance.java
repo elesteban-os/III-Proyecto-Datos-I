@@ -22,7 +22,6 @@ public class Distance {
         var request = HttpRequest.newBuilder().GET().uri(URI.create(url)).build();
         var client = HttpClient.newBuilder().build();
         var response = client.send(request, HttpResponse.BodyHandlers.ofString()).body();
-        System.out.println(url);
         return response;
     }
     
@@ -59,7 +58,6 @@ public class Distance {
                 n++;
             }
         }
-        System.out.println(result.toString());
         return result.toString();
     }
 

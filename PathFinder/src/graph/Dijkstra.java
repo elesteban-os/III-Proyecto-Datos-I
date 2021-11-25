@@ -19,7 +19,7 @@ public class Dijkstra {
         int times = 0;
         while (unsettledNodes.size() != 0) {
             Node currentNode = getClosestNode(previousNode, unsettledNodes, times);
-            if (!settledNodes.contains(destination)) {
+            if (!settledNodes.contains(destination) || destination.getPath().size() == 0) {
                 unsettledNodes.remove(currentNode);
                 for (Node adjacentNode : currentNode.getAdjacents()) {
                     if (!settledNodes.contains(adjacentNode)) {
@@ -29,18 +29,12 @@ public class Dijkstra {
                 }
                 settledNodes.add(currentNode);
                 previousNode = currentNode;
-                times++;
             } else {
                 unsettledNodes = new ArrayList<Node>();
             }
         }
-        LinkedList<Node> path = new LinkedList<>();
-        for (Node settled : settledNodes) {
-            if (settled == destination) {
-                path = settled.getPath();
-                path.add(settled);
-            }
-        }
+        LinkedList<Node> path = destination.getPath();
+        path.add(destination);
         return path;
     }
 
@@ -54,10 +48,12 @@ public class Dijkstra {
         Node closestNode = unsettledNodes.get(0);
         double lowestDistance = Double.POSITIVE_INFINITY;
         for (Node node : unsettledNodes) {
-            double nodeDistance = currentNode.getEdgeWeightTo(node);
-            if (nodeDistance < lowestDistance || (currentNode == node && n == 0)) {
-                lowestDistance = nodeDistance;
-                closestNode = node;
+            if (currentNode.getAdjacents().contains(node)) {
+                double nodeDistance = currentNode.getEdgeWeightTo(node);
+                if (nodeDistance < lowestDistance || (currentNode == node && n == 0)) {
+                    lowestDistance = nodeDistance;
+                    closestNode = node;
+                }
             }
         }
         return closestNode;
