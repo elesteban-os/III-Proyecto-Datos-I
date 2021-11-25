@@ -123,18 +123,17 @@ public class UserInterface extends JFrame{
         this.setCities();
         this.sortedPlaces = this.sorter.sort(this.cities);
         this.help = new JComboBox<>(sortedPlaces);
-        this.graph = new Graph(this.cities, this.xPlaces, this.yPlaces, this.data.getMatrix());
 
         // ComboBox
         this.city1.setBounds(10, 120, 150, 30);
         this.city2.setBounds(10, 210, 150, 30);
-        this.help.setBounds(10, 400, 150, 30);
+        this.help.setBounds(10, 420, 150, 30);
 
         // Botones
         this.calculate.setBounds(10, 250, 110, 30);
         this.calculate.addActionListener(action -> this.calculateDistance());
 
-        this.helpButton.setBounds(10, 440, 150, 30);
+        this.helpButton.setBounds(10, 460, 150, 30);
         this.helpButton.addActionListener(e -> {
             openJOptionPane();
         });
@@ -169,7 +168,7 @@ public class UserInterface extends JFrame{
         this.time.setFont(new Font("Bahnschrift", Font.PLAIN, 20));
 
         this.helpLabel.setText("Ayuda al viajero");
-        this.helpLabel.setBounds(10, 370, 170, 40);
+        this.helpLabel.setBounds(10, 390, 170, 40);
         this.helpLabel.setFont(new Font("Bahnschrift", Font.PLAIN, 20));
 
         // Paper
