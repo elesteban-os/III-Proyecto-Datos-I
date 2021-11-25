@@ -91,12 +91,7 @@ public class UserInterface extends JFrame{
         this.graph.resetNodes();
         Node origin = graph.getNode(this.places[this.city1.getSelectedIndex()]);
         Node destiny = graph.getNode(this.places[this.city2.getSelectedIndex()]);
-        System.out.println("from: " + origin.getCity().getName() + " to: " + destiny.getCity().getName());
         LinkedList<Node> path = this.calculator.getShortestPath(origin, destiny);
-        for (Node node : path) {
-            System.out.print(" go to: " + node.getCity().getName());
-        }
-        System.out.println(" got there");
         Node node = path.remove();
         int lastX = node.getX();
         int lastY = node.getY();
