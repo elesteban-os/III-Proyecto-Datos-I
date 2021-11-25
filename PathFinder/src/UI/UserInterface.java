@@ -130,11 +130,7 @@ public class UserInterface extends JFrame{
         this.graph = new Graph(this.cities, this.xPlaces, this.yPlaces, this.data.getMatrix());
         this.sortedPlaces = this.sorter.sort(this.cities);
         this.help = new JComboBox<>(sortedPlaces);
-<<<<<<< HEAD
-=======
-        this.graph = new Graph(this.cities, this.xPlaces, this.yPlaces, this.data.getMatrix());
         dlg.setVisible(false);
->>>>>>> 5c3f8e0f05e45394e0fad32684a2c0c2a1d971ec
 
         // ComboBox
         this.city1.setBounds(10, 120, 150, 30);

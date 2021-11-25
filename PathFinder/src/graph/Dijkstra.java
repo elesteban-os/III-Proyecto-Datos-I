@@ -13,25 +13,22 @@ public class Dijkstra {
     public LinkedList<Node> getShortestPath(Node source, Node destination) {
         source.setTime(0.0);
         ArrayList<Node> settledNodes = new ArrayList<Node>();
-        ArrayList<Node> unsettledNodes = new ArrayList<Node>();
-        unsettledNodes.add(source);
+        settledNodes.add(source);
+        ArrayList<Node> unsettledNodes = source.getAdjacents();
         Node previousNode = source;
         int times = 0;
-        while (unsettledNodes.size() != 0) {
+        while (!settledNodes.contains(destination)) {
             Node currentNode = getClosestNode(previousNode, unsettledNodes, times);
-            if (!settledNodes.contains(destination) || destination.getPath().size() == 0) {
-                unsettledNodes.remove(currentNode);
-                for (Node adjacentNode : currentNode.getAdjacents()) {
-                    if (!settledNodes.contains(adjacentNode)) {
-                        getMinimumDistance(adjacentNode, currentNode);
-                        unsettledNodes.add(adjacentNode);
-                    }
+            unsettledNodes.remove(currentNode);
+            for (Node adjacentNode : currentNode.getAdjacents()) {
+                if (!settledNodes.contains(adjacentNode)) {
+                    getMinimumDistance(adjacentNode, currentNode);
+                    unsettledNodes.add(adjacentNode);
                 }
-                settledNodes.add(currentNode);
-                previousNode = currentNode;
-            } else {
-                unsettledNodes = new ArrayList<Node>();
             }
+            settledNodes.add(currentNode);
+            System.out.println("settled " + currentNode.getCity().getName());
+            previousNode = currentNode;
         }
         LinkedList<Node> path = destination.getPath();
         path.add(destination);
@@ -45,12 +42,12 @@ public class Dijkstra {
      * @return node closest to the current node
      */
     private static Node getClosestNode(Node currentNode, ArrayList<Node> unsettledNodes, int n) {
-        Node closestNode = unsettledNodes.get(0);
+        Node closestNode = null;
         double lowestDistance = Double.POSITIVE_INFINITY;
         for (Node node : unsettledNodes) {
             if (currentNode.getAdjacents().contains(node)) {
                 double nodeDistance = currentNode.getEdgeWeightTo(node);
-                if (nodeDistance < lowestDistance || (currentNode == node && n == 0)) {
+                if (nodeDistance < lowestDistance) {
                     lowestDistance = nodeDistance;
                     closestNode = node;
                 }
