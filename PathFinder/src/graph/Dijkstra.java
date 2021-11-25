@@ -12,26 +12,32 @@ public class Dijkstra {
      */
     public LinkedList<Node> getShortestPath(Node source, Node destination, double delay) {
         source.setDistance(0.0);
-        ArrayList<Node> settledNodes = new ArrayList<>();
-        ArrayList<Node> unsettledNodes = new ArrayList<>();
+        ArrayList<Node> settledNodes = new ArrayList<Node>();
+        ArrayList<Node> unsettledNodes = new ArrayList<Node>();
         unsettledNodes.add(source);
-        Node previous = source;
+        Node previousNode = source;
+        int times = 0;
         while (unsettledNodes.size() != 0) {
-            Node currentNode = getClosestNode(previous, delay, unsettledNodes);
-            unsettledNodes.remove(currentNode);
-            for (Node adjacentNode : currentNode.getAdjacents()) {
-                if (!settledNodes.contains(adjacentNode)) {
-                    getMinimumDistance(adjacentNode, currentNode, delay);
-                    unsettledNodes.add(adjacentNode);
+            Node currentNode = getClosestNode(previousNode, delay, unsettledNodes, times);
+            if (currentNode != null) {
+                unsettledNodes.remove(currentNode);
+                for (Node adjacentNode : currentNode.getAdjacents()) {
+                    if (!settledNodes.contains(adjacentNode)) {
+                        getMinimumDistance(adjacentNode, currentNode, delay);
+                        unsettledNodes.add(adjacentNode);
+                    }
                 }
+                settledNodes.add(currentNode);
+                previousNode = currentNode;
+            } else {
+                unsettledNodes = new ArrayList<Node>();
             }
-            settledNodes.add(currentNode);
-            previous = currentNode;
         }
         LinkedList<Node> path = new LinkedList<>();
         for (Node settled : settledNodes) {
             if (settled == destination) {
                 path = settled.getPath();
+                path.add(settled);
             }
         }
         return path;
@@ -43,18 +49,14 @@ public class Dijkstra {
      * @param unsettledNodes list of nodes
      * @return node closest to the current node
      */
-    private static Node getClosestNode(Node currentNode, double delay, ArrayList<Node> unsettledNodes) {
+    private static Node getClosestNode(Node currentNode, double delay, ArrayList<Node> unsettledNodes, int n) {
         Node closestNode = null;
         double lowestDistance = Double.POSITIVE_INFINITY;
-        for (Node node: unsettledNodes) {
-            if (currentNode != node) {
-                double nodeDistance = currentNode.getEdgeWeightTo(node) + delay;
-                if (nodeDistance < lowestDistance) {
-                    lowestDistance = nodeDistance;
-                    closestNode = node;
-                }
-            } else {
-                closestNode = currentNode;
+        for (Node node : unsettledNodes) {
+            double nodeDistance = currentNode.getEdgeWeightTo(node) + delay;
+            if (nodeDistance < lowestDistance || (currentNode == node && n == 0)) {
+                lowestDistance = nodeDistance;
+                closestNode = node;
             }
         }
         return closestNode;

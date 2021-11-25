@@ -72,14 +72,14 @@ public class UserInterface extends JFrame{
     }
 
     public void calculateDistance() {
-        Node origin = graph.getNode("San José");
+        Node origin = graph.getNode("Pérez Zeledón");
         Node destiny = graph.getNode("Curridabat");
         LinkedList<Node> path = this.calculator.getShortestPath(origin, destiny, 0);
-        Node node = path.getFirst();
+        Node node = path.remove();
         int lastX = node.getX();
         int lastY = node.getY();
-        for (int i = 0; i < path.size() - 1; i++) {
-            Node currentNode = path.getFirst();
+        while (path.size() != 0) {
+            Node currentNode = path.remove();
             int x = currentNode.getX();
             int y = currentNode.getY();
             this.drawing.drawLines(this.paper.getGraphics(), lastX, lastY, x, y, Color.BLUE);
@@ -93,8 +93,6 @@ public class UserInterface extends JFrame{
     }
 
     public UserInterface() {
-        
-
         // ComboBox
         this.city1.setBounds(10, 120, 150, 30);
         this.city2.setBounds(10, 210, 150, 30);

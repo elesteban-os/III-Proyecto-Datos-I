@@ -68,13 +68,10 @@ public class Node {
      * @param node vertex to get the weight of 
      */
     public double getEdgeWeightTo(Node node) {
-        double weight = 0.0;
-        if (node != this) {
-            weight = Double.POSITIVE_INFINITY;
-            for (Edge edge : this.edges) {
-                if (edge.getDestination() == node) {
-                    weight = edge.getWeight();
-                }
+        double weight = Double.POSITIVE_INFINITY;
+        for (Edge edge : this.edges) {
+            if (edge.getDestination() == node) {
+                weight = edge.getWeight();
             }
         }
         return weight;
