@@ -24,6 +24,8 @@ public class UserInterface extends JFrame{
     private JLabel kmsTitle = new JLabel();
     private JLabel timeTitle = new JLabel();
     private JLabel helpLabel = new JLabel();
+    private JLabel kmsInfo = new JLabel();
+    private JLabel timeInfo = new JLabel();
     private JButton calculate = new JButton("Calcular");
     private JButton helpButton = new JButton("Consultar");
     private Draw drawing = new Draw();
@@ -111,8 +113,8 @@ public class UserInterface extends JFrame{
             lastX = x;
             lastY = y;
         }
-        this.time.setText(time + " h");
-        this.kms.setText((time - expectedDelay.doubleValue() / 60) * 80 + " kms");
+        this.time.setText(time + "");
+        this.kms.setText((time - expectedDelay.doubleValue() / 60) * 80 + "");
     }
 
     private void openJOptionPane() {
@@ -162,17 +164,25 @@ public class UserInterface extends JFrame{
         this.kmsTitle.setBounds(10, 280, 100, 40);
         this.kmsTitle.setFont(new Font("Bahnschrift", Font.PLAIN, 20));
 
-        this.kms.setText("0.0 km");
-        this.kms.setBounds(10, 300, 100, 40);
+        this.kms.setText("0.0");
+        this.kms.setBounds(10, 300, 63, 40);
         this.kms.setFont(new Font("Bahnschrift", Font.PLAIN, 20));
+
+        this.kmsInfo.setText("km");
+        this.kmsInfo.setBounds(70, 300, 100, 40);
+        this.kmsInfo.setFont(new Font("Bahnschrift", Font.PLAIN, 20));
 
         this.timeTitle.setText("Tiempo");
         this.timeTitle.setBounds(10, 330, 100, 40);
         this.timeTitle.setFont(new Font("Bahnschrift", Font.PLAIN, 20));
 
-        this.time.setText("0.0 h");
-        this.time.setBounds(10, 350, 100, 40);
+        this.time.setText("0.0");
+        this.time.setBounds(10, 350, 65, 40);
         this.time.setFont(new Font("Bahnschrift", Font.PLAIN, 20));
+
+        this.timeInfo.setText("horas");
+        this.timeInfo.setBounds(70, 350, 100, 40);
+        this.timeInfo.setFont(new Font("Bahnschrift", Font.PLAIN, 20));
 
         this.helpLabel.setText("Ayuda al viajero");
         this.helpLabel.setBounds(10, 390, 170, 40);
@@ -194,6 +204,8 @@ public class UserInterface extends JFrame{
         this.window.add(this.title);
         this.window.add(this.helpLabel);
         this.window.add(this.kmsTitle);
+        this.window.add(this.kmsInfo);
+        this.window.add(this.timeInfo);
         this.window.add(this.kms);
         this.window.add(this.timeTitle);
         this.window.add(this.time);
@@ -201,7 +213,6 @@ public class UserInterface extends JFrame{
         this.window.add(this.destino);
         this.window.add(this.calculate);
         this.window.add(this.helpButton);
-
 
         // Window
         this.window.setDefaultCloseOperation(window.EXIT_ON_CLOSE);
