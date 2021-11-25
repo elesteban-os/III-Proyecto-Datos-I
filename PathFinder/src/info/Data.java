@@ -1,4 +1,4 @@
-package data;
+package info;
 
 public class Data {
     private String[] habitants = {"342.188", "89.154", "67.392", "235.863", "33.004", "16.280", 

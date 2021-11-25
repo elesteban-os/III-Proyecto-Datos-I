@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-import data.Data;
+import info.Data;
 import graph.City;
 import graph.Graph;
 import graph.Dijkstra;
@@ -28,7 +28,6 @@ public class UserInterface extends JFrame{
     private Draw drawing = new Draw();
     private Data data = new Data();
     private City[] cities;
-    private Dataa data = new Dataa();
     private SpinnerNumberModel modelSpinner = new SpinnerNumberModel(0, 0, 60, 1);
     private JSpinner delay = new JSpinner(modelSpinner);
     private Graph graph;
