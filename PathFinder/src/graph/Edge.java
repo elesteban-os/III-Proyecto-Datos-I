@@ -17,8 +17,7 @@ public class Edge {
         this.origin = origin;
         this.destination = destination;
         Distance api = new Distance();
-        api.setCity1(origin.getCity().getName());
-        api.setCity2(destination.getCity().getName());
+        api.setCities(origin.getCity().getName(), destination.getCity().getName());
         String kms;
         try {
             kms = api.getDistance(Distance.getDistanceData(), "text");

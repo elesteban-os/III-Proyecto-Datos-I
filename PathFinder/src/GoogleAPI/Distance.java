@@ -64,19 +64,27 @@ public class Distance {
     }
 
     /**
-     * Hace un set a city1.
+     * Hace un set a city1 y city2.
      * @param city1 string de la nueva ciudad.
-     */
-    public void setCity1(String city1) {
-        this.city1 = city1;
-    }
-
-    /**
-     * Hace un set a city2.
      * @param city2 string de la nueva ciudad.
      */
-    public void setCity2(String city2) {
-        this.city2 = city2;
+    public void setCities(String city1, String city2) {
+        Distance.city1 = changeName(city1);
+        Distance.city2 = changeName(city2);
+    }
+
+    private String changeName(String name) {
+        char[] letters = name.toCharArray();
+        StringBuilder result = new StringBuilder();
+        for (char letter : letters) {
+            if (letter == ' ') {
+                result.append("+");
+            } else {
+                result.append(letter);
+            }
+        }
+        result.append("+San+José+Costa+Rica");
+        return String.valueOf(result);
     }
 
     public static void main(String[] args) throws Exception {
