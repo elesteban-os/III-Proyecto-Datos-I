@@ -33,22 +33,22 @@ public class Distance {
      * @return retorna la distancia entre dos puntos.
      */
     public String getDistance(String json, String searching){
+        System.out.println(json);
         String[] words = json.split(" ");
         int n = 0;
         StringBuilder result = new StringBuilder();
         for(String p : words){
             if (n == 2){
                 String[] letters = p.split("");
-                
+                int k = 0;                
                 boolean lastDigit = false;
                 for(String c : letters){
                     if (c.contains("\"")){
                         continue;
-                    } else if (lastDigit){
+                    } else if (lastDigit || (k == 2 && !c.contains("."))){
                         result.append(c);
-                        System.out.println(result.toString());
-                        break;
-                    } else if (c.contains(".")) {
+                        break;                    
+                    } else if (c.contains(".")){
                         result.append(c);
                         lastDigit = true;                       
                     } else {
@@ -60,6 +60,7 @@ public class Distance {
                 n++;
             }
         }
+        System.out.println(result.toString());
         return result.toString();
     }
 
@@ -85,5 +86,13 @@ public class Distance {
         }
         result.append("+San+José+Costa+Rica");
         return String.valueOf(result);
+    }
+
+    public static void main(String[] args){
+        Distance a = new Distance();
+        String ex = "\"text\" : \"136 km\",";
+        System.out.println(a.getDistance(ex, "\"text\""));
+
+
     }
 }

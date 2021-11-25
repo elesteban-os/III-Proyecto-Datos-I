@@ -88,9 +88,12 @@ public class UserInterface extends JFrame{
         }
     }
 
+    private void openJOptionPane() {
+        JOptionPane.showMessageDialog(null, this.cities[this.help.getSelectedIndex()].getInfo());
+    }
+
     public UserInterface() {
-        setCities();
-        this.graph = new Graph(this.cities, this.xPlaces, this.yPlaces, this.data.getMatrix());
+        
 
         // ComboBox
         this.city1.setBounds(10, 120, 150, 30);
@@ -103,8 +106,7 @@ public class UserInterface extends JFrame{
 
         this.helpButton.setBounds(10, 440, 150, 30);
         this.helpButton.addActionListener(e -> {
-            Graphics g = paper.getGraphics();
-            drawing.drawLines(g, 12, 12, 232, 232, Color.BLACK);
+            openJOptionPane();
         });
 
         // Labels
@@ -160,6 +162,9 @@ public class UserInterface extends JFrame{
         this.window.setSize(850, 640);
         this.window.setResizable(false);
         this.window.setVisible(true);
+
+        setCities();
+        this.graph = new Graph(this.cities, this.xPlaces, this.yPlaces, this.data.getMatrix());
     }
 
     public static void main(String[] args){
