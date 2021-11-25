@@ -27,13 +27,9 @@ public class UserInterface extends JFrame{
     private JButton helpButton = new JButton("Consultar");
     private Draw drawing = new Draw();
     private Data data = new Data();
-<<<<<<< HEAD
     private City[] cities = new City[15];
-=======
-    private City[] cities;
     private SpinnerNumberModel modelSpinner = new SpinnerNumberModel(0, 0, 60, 1);
     private JSpinner delay = new JSpinner(modelSpinner);
->>>>>>> 41bd77f34949974042a26597833f5fd9b8628d24
     private Graph graph;
     private Dijkstra calculator = new Dijkstra();
     
