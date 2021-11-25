@@ -204,6 +204,9 @@ public class UserInterface extends JFrame{
         this.window.setSize(850, 640);
         this.window.setResizable(false);
         this.window.setVisible(true);
+
+        this.graph = new Graph(this.cities, this.xPlaces, this.yPlaces, this.data.getMatrix());
+        this.calculate.setEnabled(true);
     }
 
     public static void main(String[] args){
