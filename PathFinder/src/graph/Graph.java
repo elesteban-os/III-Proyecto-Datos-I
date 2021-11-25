@@ -14,7 +14,7 @@ public class Graph {
      */
     public Graph(City[] cities, int[] xs, int[] ys, int[][] adjacents) {
         for (int i = 0; i < cities.length; i++) {
-            nodes.add(new Node(cities[i], xs[i], ys[i]));
+            nodes.add(new Node(cities[i], xs[i] + 5, ys[i] + 5));
         }
         this.createEdges(adjacents);
         this.sortNodes();
