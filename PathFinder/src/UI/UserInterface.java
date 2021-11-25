@@ -13,6 +13,7 @@ public class UserInterface extends JFrame{
     private JLabel origen = new JLabel();
     private JLabel destino = new JLabel();
     private Draw drawing = new Draw();
+    
     ImageIcon mapIcon = new ImageIcon(getClass().getResource("/Images/map.png"));
     private JPanel paper = new JPanel(){
         public void paintComponent(Graphics g){
@@ -27,61 +28,6 @@ public class UserInterface extends JFrame{
     //                       1    2    3    4    5    6    7    8    9    10   11   12   13   14   15
     private int[] xPlaces = {205, 246, 230, 284,  98, 286, 245, 320, 204, 340, 185, 262, 286, 440, 290};
     private int[] yPlaces = {149, 175, 159, 187, 251, 327, 247, 127, 150,  91, 247, 126, 142, 439, 152};
-    
-    private String[] habitants = {"342.188", "89.154", "67.392", "235.863", "33.004", "16.280", 
-                                  "61.338", "113.557", "60.453", "68.725", "21.335", "82.216", 
-                                  "61.661", "143.117", "77.028"};
-
-    private String[] spots = {"Volcán Arenal, Museo Nacional, Museo del Jade, Museo del Banco Central de Costa Rica.", 
-                              "Cerro San Miguel, Alto del Palo de Campana, La Piedra del Minero.",
-                              "Alto de la Granadilla, Parque La Rosa Linda.",
-                              "Parque Centenario, Parque para el Adulto Mayor, Polideportivo El Porvenir, Museo de la Carreta.",
-                              "Parque de Puriscal, Iglesia de Jilgueral.", 
-                              "Cerro La Trinidad, Finca Araliza, La Concepción Tarrazu.",
-                              "Parque de Aserrí, Altos Del Bosque, Parque Acuático Los Sueños.",
-                              "Reserva Los Coyotes, Quinta La Yoyita, Parque Ecológico Don Edgar Calle Gutiérrez.",
-                              "Furati Wellness, 9Round Santa Ana.",
-                              "Parroquia de San Isidro Labrador, Coronado a caballo, Underfire paintball.",
-                              "Parroquia San Ignacio de Loyola, Río Grande de Candelaria, Río Pirris, Fila Bustamente.",
-                              "Parroquia San Juan Bautista, Estadio Ricardo Saprissa, Iglesia Sagrado Corazón de Jesús.",
-                              "Cruz de Sabanilla, Mall San Pedro, Rotonda de la Hispanidad, Parque del Este.",
-                              "Parque Central, Aeropuerto de Pérez Zeledón, Bosque La Bambú, Estadio Municipal.",
-                              "Multiplaza Curridabat, Indoor Club, Parque Súper Perro."
-                            };
-
-    private String[] restaurants= {"Restaurante Grano de Oro, Ibérik Restaurant, Furca, Café Rojo.",
-                                  "Restaurante La Cueva.",
-                                  "Rincón De Las Delicias, La Casona de Laly, La Posada de las Brujas, Picola Pizza Pub.",
-                                  "Cheesus, Pizza Hut, Mr. Monchis, Soda Yoguis.",
-                                  "Soda Bar y Restaurant Santa Marta, Bar Restaurant El Rinconcito del Sabor.",
-                                  "Lagos Los Ángeles, Vista del Lago Coffee Tour, Bar y Restaurante Menfis.",
-                                  "Chicharronera Cacique Acserí, Wil’s, La Bodeguita Artesanal Aserrí.",
-                                  "Restaurante La Chola Tila, Seiku, Pops, Agnus Restaurante y Salón.",
-                                  "Bacchus Restaurante, Edu’s Sandwiches",  
-                                  "Eloticos Benditos, Pizza Hut, KFC, McDonald 's.",
-                                  "Restaurante Los Pozos, El 7 de cada mes Cafetería.",
-                                  "Soda Pilar, Sodita San Juán, Checa Comidas, Soda Cucharra Oriental.",
-                                  "Kopi Café, Xcape Bar & Lounge, La Gata Gastronómica.",
-                                  "McDonald 's, Kingyo Sushi & Fusión.",
-                                  "Burger King, Kbaña Classic."
-                                };
-
-    private String[] gasStations = {"Uno, Bomba Costa Rica, Tournon, Bomba La Pista.",
-                                    "Bomba Alajuelita.",
-                                    "Delta San Rafael de Escazú.",
-                                    "Gasolinera Anatot.",
-                                    "Delta Puriscal.",
-                                    "BASADIA, Bomba Gasolinera San Marcos.",
-                                    "Gasolinera Trova, Gasotica Aserrí.",
-                                    "Delta, Servicentro El Carmen, Servicentro El Carmen.",
-                                    "Gasolinera Santa Ana.",
-                                    "Gasolinera Coronado.",
-                                    "Estación de Servicio Coopecaraigres.",
-                                    "Servicentro J.S.M, Estación de Servicio San Juan, Uno, Delta.",
-                                    "Servicentro San Rafael.",
-                                    "Gasotica",
-                                    "La Galera, ServiIndoor, Gasolinera y Gas LP El Ranchito.",
-                                   };
                             
     private JComboBox<String> city1 = new JComboBox<>(places);
     private JComboBox<String> city2 = new JComboBox<>(places);
