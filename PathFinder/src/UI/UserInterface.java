@@ -123,6 +123,7 @@ public class UserInterface extends JFrame{
         this.setCities();
         this.sortedPlaces = this.sorter.sort(this.cities);
         this.help = new JComboBox<>(sortedPlaces);
+        this.graph = new Graph(this.cities, this.xPlaces, this.yPlaces, this.data.getMatrix());
 
         // ComboBox
         this.city1.setBounds(10, 120, 150, 30);
@@ -204,7 +205,6 @@ public class UserInterface extends JFrame{
         this.window.setResizable(false);
         this.window.setVisible(true);
 
-        this.graph = new Graph(this.cities, this.xPlaces, this.yPlaces, this.data.getMatrix());
         this.calculate.setEnabled(true);
     }
 
