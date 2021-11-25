@@ -4,6 +4,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+import graph.City;
+import Data.Dataa;
 
 public class UserInterface extends JFrame{
     
@@ -13,6 +15,8 @@ public class UserInterface extends JFrame{
     private JLabel origen = new JLabel();
     private JLabel destino = new JLabel();
     private Draw drawing = new Draw();
+    private City[] cities;
+    private Dataa data = new Dataa();
     
     ImageIcon mapIcon = new ImageIcon(getClass().getResource("/Images/map.png"));
     private JPanel paper = new JPanel(){
@@ -40,7 +44,18 @@ public class UserInterface extends JFrame{
         for (int i = 0; i < len; i++){
             this.drawing.drawCircles(g, this.xPlaces[i], this.yPlaces[i], color); 
         }
-    }    
+    }
+    
+    public void setCities(){
+        String[] habitants = this.data.getHabitants();
+        String[] spots = this.data.getSpots();
+        String[] restaurants = this.data.getRestaurants();
+        String[] gasStations = this.data.getGasStations();
+        int len = spots.length;
+        for(int i = 0; i < len; i++){
+            this.cities[i] = new City(this.places[i], habitants[i], spots[i], restaurants[i], gasStations[i]);
+        }
+    }
 
     public UserInterface() {
         // ComboBox

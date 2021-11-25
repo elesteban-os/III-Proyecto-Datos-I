@@ -1,4 +1,5 @@
-public class data {
+package Data;
+public class Dataa {
     private String[] habitants = {"342.188", "89.154", "67.392", "235.863", "33.004", "16.280", 
                                   "61.338", "113.557", "60.453", "68.725", "21.335", "82.216", 
                                   "61.661", "143.117", "77.028"};
@@ -110,4 +111,5 @@ public class data {
     public void setHabitants(String[] habitants) {
         this.habitants = habitants;
     }
+    
 }
