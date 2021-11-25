@@ -53,20 +53,6 @@ public class Node {
      */
     public void addEdgeTo(Node node) {
         this.edges.add(new Edge(this, node));
-        this.sortEdges();
-    }
-
-    /**
-     * Method to place a new edge for the node in the correct position so its list is sorted by closeness
-     */
-    private void sortEdges() {
-        for (int i = 1; i < this.edges.size(); i++) {
-            if (this.edges.get(i).getWeight() < this.edges.get(i-1).getWeight()) {
-                Edge temp = this.edges.get(i);
-                this.edges.set(i - 1, this.edges.get(i));
-                this.edges.set(i, temp);
-            }
-        }
     }
 
     /**

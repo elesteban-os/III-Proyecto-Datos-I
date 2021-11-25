@@ -16,9 +16,8 @@ public class Dijkstra {
         settledNodes.add(source);
         ArrayList<Node> unsettledNodes = source.getAdjacents();
         Node previousNode = source;
-        int times = 0;
         while (!settledNodes.contains(destination)) {
-            Node currentNode = getClosestNode(previousNode, unsettledNodes, times);
+            Node currentNode = getClosestNode(previousNode, unsettledNodes);
             unsettledNodes.remove(currentNode);
             for (Node adjacentNode : currentNode.getAdjacents()) {
                 if (!settledNodes.contains(adjacentNode)) {
@@ -41,16 +40,14 @@ public class Dijkstra {
      * @param unsettledNodes list of nodes
      * @return node closest to the current node
      */
-    private static Node getClosestNode(Node currentNode, ArrayList<Node> unsettledNodes, int n) {
-        Node closestNode = null;
+    private static Node getClosestNode(Node currentNode, ArrayList<Node> unsettledNodes) {
+        Node closestNode = unsettledNodes.get(0);
         double lowestDistance = Double.POSITIVE_INFINITY;
         for (Node node : unsettledNodes) {
-            if (currentNode.getAdjacents().contains(node)) {
-                double nodeDistance = currentNode.getEdgeWeightTo(node);
-                if (nodeDistance < lowestDistance) {
-                    lowestDistance = nodeDistance;
-                    closestNode = node;
-                }
+            double nodeDistance = currentNode.getEdgeWeightTo(node);
+            if (nodeDistance < lowestDistance) {
+                lowestDistance = nodeDistance;
+                closestNode = node;
             }
         }
         return closestNode;
@@ -63,10 +60,10 @@ public class Dijkstra {
      */
     private static void getMinimumDistance(Node node, Node sourceNode) {
         double weight = sourceNode.getEdgeWeightTo(node);
-        double sourceDistance = sourceNode.getTime();
-        if (sourceDistance + weight < node.getTime()) {
-            node.setTime(sourceDistance + weight);
-            LinkedList<Node> shortestPath = new LinkedList<>(sourceNode.getPath());
+        double sourceTime = sourceNode.getTime();
+        if (sourceTime + weight < node.getTime()) {
+            node.setTime(sourceTime + weight);
+            LinkedList<Node> shortestPath = new LinkedList<Node>(sourceNode.getPath());
             shortestPath.add(sourceNode);
             node.setPath(shortestPath);
         }
