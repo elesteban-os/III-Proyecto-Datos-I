@@ -22,12 +22,12 @@ public class UserInterface extends JFrame{
     private JLabel destino = new JLabel();
     private Draw drawing = new Draw();
     private Data data = new Data();
-    private City[] cities;
+    private City[] cities = new City[15];
     private Graph graph;
     private Dijkstra calculator = new Dijkstra();
     
     ImageIcon mapIcon = new ImageIcon(getClass().getResource("/Images/map.png"));
-    private JPanel paper = new JPanel(){
+    private JPanel paper = new JPanel() {
         public void paintComponent(Graphics g){
             super.paintComponent(g);
             g.drawImage(mapIcon.getImage(), 0, 0, 600, 600, null);
@@ -65,9 +65,20 @@ public class UserInterface extends JFrame{
     }
 
     public void calulateDistance() {
-        Node origin = graph.getNode("");
-        Node destiny = graph.getNode("");
+        Node origin = graph.getNode("San José");
+        Node destiny = graph.getNode("Curridabat");
         LinkedList<Node> path = this.calculator.getShortestPath(origin, destiny, 0);
+        Node node = path.getFirst();
+        int lastX = node.getX();
+        int lastY = node.getY();
+        for (int i = 0; i < path.size() - 1; i++) {
+            Node currentNode = path.getFirst();
+            int x = currentNode.getX();
+            int y = currentNode.getY();
+            this.drawing.drawLines(this.paper.getGraphics(), lastX, lastY, x, y, Color.BLUE);
+            lastX = x;
+            lastY = y;
+        }
     }
 
     public UserInterface() {
