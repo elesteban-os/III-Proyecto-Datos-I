@@ -15,8 +15,14 @@ public class Dijkstra {
         ArrayList<Node> settledNodes = new ArrayList<Node>();
         settledNodes.add(source);
         ArrayList<Node> unsettledNodes = source.getAdjacents();
+        for (Node unsettled : unsettledNodes) {
+            unsettled.setTime(source.getEdgeWeightTo(unsettled));
+            LinkedList<Node> startPath = new LinkedList<Node>(source.getPath());
+            startPath.add(source);
+            unsettled.setPath(startPath);
+        }
         Node previousNode = source;
-        while (!settledNodes.contains(destination)) {
+        while (!unsettledNodes.isEmpty()) {
             Node currentNode = getClosestNode(previousNode, unsettledNodes);
             unsettledNodes.remove(currentNode);
             for (Node adjacentNode : currentNode.getAdjacents()) {
@@ -26,7 +32,6 @@ public class Dijkstra {
                 }
             }
             settledNodes.add(currentNode);
-            System.out.println("settled " + currentNode.getCity().getName());
             previousNode = currentNode;
         }
         LinkedList<Node> path = destination.getPath();
@@ -59,10 +64,9 @@ public class Dijkstra {
      * @param sourceNode node where its coming from
      */
     private static void getMinimumDistance(Node node, Node sourceNode) {
-        double weight = sourceNode.getEdgeWeightTo(node);
-        double sourceTime = sourceNode.getTime();
-        if (sourceTime + weight < node.getTime()) {
-            node.setTime(sourceTime + weight);
+        double sourceTime = sourceNode.getTime() + sourceNode.getEdgeWeightTo(node);
+        if (sourceTime < node.getTime()) {
+            node.setTime(sourceTime);
             LinkedList<Node> shortestPath = new LinkedList<Node>(sourceNode.getPath());
             shortestPath.add(sourceNode);
             node.setPath(shortestPath);
