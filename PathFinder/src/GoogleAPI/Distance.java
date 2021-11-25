@@ -84,12 +84,4 @@ public class Distance {
         result.append("+San+José+Costa+Rica");
         return String.valueOf(result);
     }
-
-    public static void main(String[] args){
-        Distance a = new Distance();
-        String ex = "\"text\" : \"136 km\",";
-        System.out.println(a.getDistance(ex, "\"text\""));
-
-
-    }
 }
