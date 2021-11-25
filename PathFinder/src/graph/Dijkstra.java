@@ -10,28 +10,25 @@ public class Dijkstra {
      * @param destination node to get to
      * @returns LinkedLlist with the shortest path from source to destination
      */
-    public LinkedList<Node> getShortestPath(Node source, Node destination, double delay) {
-        source.setDistance(0.0);
+    public LinkedList<Node> getShortestPath(Node source, Node destination) {
+        source.setTime(0.0);
         ArrayList<Node> settledNodes = new ArrayList<Node>();
         ArrayList<Node> unsettledNodes = new ArrayList<Node>();
         unsettledNodes.add(source);
         Node previousNode = source;
         int times = 0;
         while (unsettledNodes.size() != 0) {
-            Node currentNode = getClosestNode(previousNode, delay, unsettledNodes, times);
-            if (currentNode != null) {
-                unsettledNodes.remove(currentNode);
-                for (Node adjacentNode : currentNode.getAdjacents()) {
-                    if (!settledNodes.contains(adjacentNode)) {
-                        getMinimumDistance(adjacentNode, currentNode, delay);
-                        unsettledNodes.add(adjacentNode);
-                    }
+            Node currentNode = getClosestNode(previousNode, unsettledNodes, times);
+            unsettledNodes.remove(currentNode);
+            for (Node adjacentNode : currentNode.getAdjacents()) {
+                if (!settledNodes.contains(adjacentNode)) {
+                    getMinimumDistance(adjacentNode, currentNode);
+                    unsettledNodes.add(adjacentNode);
                 }
-                settledNodes.add(currentNode);
-                previousNode = currentNode;
-            } else {
-                unsettledNodes = new ArrayList<Node>();
             }
+            settledNodes.add(currentNode);
+            previousNode = currentNode;
+            times++;
         }
         LinkedList<Node> path = new LinkedList<>();
         for (Node settled : settledNodes) {
@@ -49,11 +46,11 @@ public class Dijkstra {
      * @param unsettledNodes list of nodes
      * @return node closest to the current node
      */
-    private static Node getClosestNode(Node currentNode, double delay, ArrayList<Node> unsettledNodes, int n) {
-        Node closestNode = null;
+    private static Node getClosestNode(Node currentNode, ArrayList<Node> unsettledNodes, int n) {
+        Node closestNode = unsettledNodes.get(0);
         double lowestDistance = Double.POSITIVE_INFINITY;
         for (Node node : unsettledNodes) {
-            double nodeDistance = currentNode.getEdgeWeightTo(node) + delay;
+            double nodeDistance = currentNode.getEdgeWeightTo(node);
             if (nodeDistance < lowestDistance || (currentNode == node && n == 0)) {
                 lowestDistance = nodeDistance;
                 closestNode = node;
@@ -67,14 +64,14 @@ public class Dijkstra {
      * @param node node to get its closest adjacent node
      * @param sourceNode node where its coming from
      */
-    private static void getMinimumDistance(Node node, Node sourceNode, double delay) {
-        double weight = sourceNode.getEdgeWeightTo(node) + delay;
-        double sourceDistance = sourceNode.getDistance();
-        if (sourceDistance + weight < node.getDistance()) {
-            node.setDistance(sourceDistance + weight);
+    private static void getMinimumDistance(Node node, Node sourceNode) {
+        double weight = sourceNode.getEdgeWeightTo(node);
+        double sourceDistance = sourceNode.getTime();
+        if (sourceDistance + weight < node.getTime()) {
+            node.setTime(sourceDistance + weight);
             LinkedList<Node> shortestPath = new LinkedList<>(sourceNode.getPath());
             shortestPath.add(sourceNode);
             node.setPath(shortestPath);
-    }
+        }
     }
 }

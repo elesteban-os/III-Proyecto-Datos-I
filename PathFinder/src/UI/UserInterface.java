@@ -9,6 +9,7 @@ import javax.swing.*;
 
 import info.Data;
 import graph.City;
+import graph.QuickSort;
 import graph.Graph;
 import graph.Dijkstra;
 import graph.Node;
@@ -17,16 +18,19 @@ public class UserInterface extends JFrame{
     
     private JFrame window = new JFrame("Path Finder");
     private JLabel kms = new JLabel(); 
+    private JLabel time = new JLabel(); 
     private JLabel map = new JLabel();
     private JLabel title = new JLabel();
     private JLabel origen = new JLabel();
     private JLabel destino = new JLabel();
     private JLabel kmsTitle = new JLabel();
+    private JLabel timeTitle = new JLabel();
     private JLabel helpLabel = new JLabel();
     private JButton calculate = new JButton("Calcular");
     private JButton helpButton = new JButton("Consultar");
     private Draw drawing = new Draw();
     private Data data = new Data();
+    private QuickSort sorter = new QuickSort();
     private City[] cities = new City[15];
     private SpinnerNumberModel modelSpinner = new SpinnerNumberModel(0, 0, 60, 1);
     private JSpinner delay = new JSpinner(modelSpinner);
@@ -44,13 +48,14 @@ public class UserInterface extends JFrame{
     
     private String[] places = {"San José", "Alajuelita", "Escazú", "Desamparados", "Puriscal", "Tarrazú", "Aserrí", "Goicoechea", 
                                "Santa Ana", "Vázquez de Coronado", "Acosta", "Tibás", "Montes de Oca", "Pérez Zeledón", "Curridabat"};
+    private String[] sortedPlaces;
     //                       1    2    3    4    5    6    7    8    9    10   11   12   13   14   15
     private int[] xPlaces = {205, 246, 230, 284,  98, 286, 245, 320, 204, 340, 185, 262, 286, 440, 290};
     private int[] yPlaces = {149, 175, 159, 187, 251, 327, 247, 127, 150,  91, 247, 126, 142, 439, 152};
                             
     private JComboBox<String> city1 = new JComboBox<>(places);
     private JComboBox<String> city2 = new JComboBox<>(places);
-    private JComboBox<String> help = new JComboBox<>(places);
+    private JComboBox<String> help;
 
 
     public void drawNodes(Graphics g, Color color){
@@ -72,27 +77,42 @@ public class UserInterface extends JFrame{
     }
 
     public void calculateDistance() {
-        Node origin = graph.getNode("Pérez Zeledón");
-        Node destiny = graph.getNode("Curridabat");
-        LinkedList<Node> path = this.calculator.getShortestPath(origin, destiny, 0);
+        Node origin = graph.getNode(this.places[this.city1.getSelectedIndex()]);
+        Node destiny = graph.getNode(this.places[this.city2.getSelectedIndex()]);
+        System.out.println("from: " + origin.getCity().getName() + " to: " + destiny.getCity().getName());
+        LinkedList<Node> path = this.calculator.getShortestPath(origin, destiny);
+        for (Node node : path) {
+            System.out.print(" go to: " + node.getCity().getName());
+        }
+        System.out.println(" got there");
         Node node = path.remove();
         int lastX = node.getX();
         int lastY = node.getY();
+        Integer expectedDelay =  (int) this.delay.getValue();
+        double time = expectedDelay.doubleValue() / 60;
         while (path.size() != 0) {
             Node currentNode = path.remove();
             int x = currentNode.getX();
             int y = currentNode.getY();
+            time = currentNode.getTime();
             this.drawing.drawLines(this.paper.getGraphics(), lastX, lastY, x, y, Color.BLUE);
             lastX = x;
             lastY = y;
         }
+        this.time.setText(time + " h");
+        this.kms.setText((time - expectedDelay.doubleValue() / 60) * 80 + " kms");
     }
 
     private void openJOptionPane() {
-        JOptionPane.showMessageDialog(null, this.cities[this.help.getSelectedIndex()].getInfo());
+        JOptionPane.showMessageDialog(null, this.graph.getNode(this.sortedPlaces[this.help.getSelectedIndex()]).getCity().getInfo());
     }
 
     public UserInterface() {
+        this.setCities();
+        this.sortedPlaces = this.sorter.sort(this.cities);
+        this.help = new JComboBox<>(sortedPlaces);
+        this.graph = new Graph(this.cities, this.xPlaces, this.yPlaces, this.data.getMatrix());
+
         // ComboBox
         this.city1.setBounds(10, 120, 150, 30);
         this.city2.setBounds(10, 210, 150, 30);
@@ -121,12 +141,20 @@ public class UserInterface extends JFrame{
         this.destino.setFont(new Font("Bahnschrift", Font.PLAIN, 20));
 
         this.kmsTitle.setText("Distancia");
-        this.kmsTitle.setBounds(10, 300, 100, 40);
+        this.kmsTitle.setBounds(10, 280, 100, 40);
         this.kmsTitle.setFont(new Font("Bahnschrift", Font.PLAIN, 20));
 
-        this.kms.setText("0.0 KM");
-        this.kms.setBounds(10, 320, 100, 40);
+        this.kms.setText("0.0 km");
+        this.kms.setBounds(10, 300, 100, 40);
         this.kms.setFont(new Font("Bahnschrift", Font.PLAIN, 20));
+
+        this.timeTitle.setText("Tiempo");
+        this.timeTitle.setBounds(10, 330, 100, 40);
+        this.timeTitle.setFont(new Font("Bahnschrift", Font.PLAIN, 20));
+
+        this.time.setText("0.0 h");
+        this.time.setBounds(10, 350, 100, 40);
+        this.time.setFont(new Font("Bahnschrift", Font.PLAIN, 20));
 
         this.helpLabel.setText("Ayuda al viajero");
         this.helpLabel.setBounds(10, 370, 170, 40);
@@ -149,6 +177,8 @@ public class UserInterface extends JFrame{
         this.window.add(this.helpLabel);
         this.window.add(this.kmsTitle);
         this.window.add(this.kms);
+        this.window.add(this.timeTitle);
+        this.window.add(this.time);
         this.window.add(this.origen);
         this.window.add(this.destino);
         this.window.add(this.calculate);
@@ -160,9 +190,6 @@ public class UserInterface extends JFrame{
         this.window.setSize(850, 640);
         this.window.setResizable(false);
         this.window.setVisible(true);
-
-        setCities();
-        this.graph = new Graph(this.cities, this.xPlaces, this.yPlaces, this.data.getMatrix());
     }
 
     public static void main(String[] args){

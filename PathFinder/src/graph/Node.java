@@ -9,7 +9,7 @@ public class Node {
     private int y;
     private ArrayList<Edge> edges = new ArrayList<Edge>();
     private LinkedList<Node> path = new LinkedList<Node>();
-    private double distance = Double.POSITIVE_INFINITY;
+    private double time = Double.POSITIVE_INFINITY;
 
     /**
      * Constructor that creates a vertex with a city
@@ -53,6 +53,20 @@ public class Node {
      */
     public void addEdgeTo(Node node) {
         this.edges.add(new Edge(this, node));
+        this.sortEdges();
+    }
+
+    /**
+     * Method to place a new edge for the node in the correct position so its list is sorted by closeness
+     */
+    private void sortEdges() {
+        for (int i = 1; i < this.edges.size(); i++) {
+            if (this.edges.get(i).getWeight() < this.edges.get(i-1).getWeight()) {
+                Edge temp = this.edges.get(i);
+                this.edges.set(i - 1, this.edges.get(i));
+                this.edges.set(i, temp);
+            }
+        }
     }
 
     /**
@@ -106,18 +120,18 @@ public class Node {
     }
 
     /**
-     * Setter for the distance to this node
-     * @param distance double with the distance to set
+     * Setter for the time to get to this node
+     * @param time double with the time to set
      */
-    public void setDistance(double distance) {
-        this.distance = distance;
+    public void setTime(double time) {
+        this.time = time;
     }
 
     /**
-     * Getter for the distance to this node
-     * @return distance to this node
+     * Getter for the time to get to to this node
+     * @return double for the time
      */
-    public double getDistance() {
-        return this.distance;
+    public double getTime() {
+        return this.time;
     }
 }
