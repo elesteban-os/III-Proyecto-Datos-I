@@ -3,14 +3,25 @@ package graph;
 import java.util.ArrayList;
 
 public class QuickSort {
-    private ArrayList<Node> nodes = new ArrayList<>();
+    private ArrayList<Node> nodes = new ArrayList<Node>();
 
-    public void sort(ArrayList<Node> nodes) {
+    /**
+     * Method to sort alphabetically an ArrayList of nodes
+     * @param nodes ArrayList of nodes to sort
+     * @returns sorted ArrayList
+     */
+    public ArrayList<Node> sort(ArrayList<Node> nodes) {
         this.nodes = nodes;
-        sorter(0, nodes.size() - 1);
+        this.quickSort(0, nodes.size() - 1);
+        return this.nodes;
     }
 
-    private void sorter(int low, int high) {
+    /**
+     * Recursive method to do the sort
+     * @param low lower limit index 
+     * @param high higher limit index
+     */
+    private void quickSort(int low, int high) {
         int i = low, j = high;
         int pivot = this.nodes.get(i).getCity().getPlace();
         while (i <= j) {
@@ -29,10 +40,10 @@ public class QuickSort {
             }
         }
         if (low < j) {
-            sorter(low, j);
+            this.quickSort(low, j);
         }
         if (i < high) {
-            sorter(i, high);
+            this.quickSort(i, high);
         }
     }
 }

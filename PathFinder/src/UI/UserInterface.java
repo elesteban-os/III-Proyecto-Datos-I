@@ -1,11 +1,17 @@
 package UI;
 
+import java.util.LinkedList;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+
+import data.Data;
 import graph.City;
-import Data.Dataa;
+import graph.Graph;
+import graph.Dijkstra;
+import graph.Node;
 
 public class UserInterface extends JFrame{
     
@@ -15,8 +21,10 @@ public class UserInterface extends JFrame{
     private JLabel origen = new JLabel();
     private JLabel destino = new JLabel();
     private Draw drawing = new Draw();
+    private Data data = new Data();
     private City[] cities;
-    private Dataa data = new Dataa();
+    private Graph graph;
+    private Dijkstra calculator = new Dijkstra();
     
     ImageIcon mapIcon = new ImageIcon(getClass().getResource("/Images/map.png"));
     private JPanel paper = new JPanel(){
@@ -38,7 +46,6 @@ public class UserInterface extends JFrame{
 
     private JButton calculate = new JButton("Calcular");
 
-
     public void drawNodes(Graphics g, Color color){
         int len = this.xPlaces.length;
         for (int i = 0; i < len; i++){
@@ -57,7 +64,16 @@ public class UserInterface extends JFrame{
         }
     }
 
+    public void calulateDistance() {
+        Node origin = graph.getNode("");
+        Node destiny = graph.getNode("");
+        LinkedList<Node> path = this.calculator.getShortestPath(origin, destiny, 0);
+    }
+
     public UserInterface() {
+        setCities();
+        this.graph = new Graph(this.cities, this.xPlaces, this.yPlaces, this.data.getMatrix());
+
         // ComboBox
         this.city1.setBounds(10, 120, 150, 30);
         this.city2.setBounds(10, 210, 150, 30);
