@@ -39,14 +39,15 @@ public class UserInterface extends JFrame{
             super.paintComponent(g);
             g.drawImage(mapIcon.getImage(), 0, 0, 600, 600, null);
             drawNodes(g, Color.BLACK);
+            drawResetLines(g);
         }
     };
     
     private String[] places = {"San José", "Alajuelita", "Escazú", "Desamparados", "Puriscal", "Tarrazú", "Aserrí", "Goicoechea", 
                                "Santa Ana", "Vázquez de Coronado", "Acosta", "Tibás", "Montes de Oca", "Pérez Zeledón", "Curridabat"};
     //                       1    2    3    4    5    6    7    8    9    10   11   12   13   14   15
-    private int[] xPlaces = {205, 246, 230, 284,  98, 286, 245, 320, 204, 340, 185, 262, 286, 440, 290};
-    private int[] yPlaces = {149, 175, 159, 187, 251, 327, 247, 127, 150,  91, 247, 126, 142, 439, 152};
+    private int[] xPlaces = {240, 246, 230, 284,  98, 286, 245, 320, 204, 340, 185, 262, 286, 440, 290};
+    private int[] yPlaces = {130, 175, 159, 187, 251, 327, 247, 127, 150,  91, 247, 126, 142, 439, 152};
                             
     private JComboBox<String> city1 = new JComboBox<>(places);
     private JComboBox<String> city2 = new JComboBox<>(places);
@@ -56,7 +57,18 @@ public class UserInterface extends JFrame{
     public void drawNodes(Graphics g, Color color){
         int len = this.xPlaces.length;
         for (int i = 0; i < len; i++){
-            this.drawing.drawCircles(g, this.xPlaces[i], this.yPlaces[i], color); 
+            this.drawing.drawCircles(g, this.xPlaces[i], this.yPlaces[i], color, this.places[i]); 
+        }
+    }
+
+    public void drawResetLines(Graphics g){
+        int[][] matrix = data.getMatrix();
+        for (int i = 0; i < 15; i++){
+            for (int j = 0; j < 15; j++){
+                if (matrix[i][j] == 1){
+                    this.drawing.drawLines(g, this.xPlaces[j] + 5, this.yPlaces[j] + 5, this.xPlaces[i] + 5, this.yPlaces[i] + 5, Color.BLACK);
+                }
+            }
         }
     }
     
@@ -101,6 +113,7 @@ public class UserInterface extends JFrame{
         // Botones
         this.calculate.setBounds(10, 250, 110, 30);
         this.calculate.addActionListener(action -> this.calculateDistance());
+        this.calculate.setEnabled(false);
 
         this.helpButton.setBounds(10, 440, 150, 30);
         this.helpButton.addActionListener(e -> {
@@ -154,15 +167,17 @@ public class UserInterface extends JFrame{
         this.window.add(this.calculate);
         this.window.add(this.helpButton);
 
+
         // Window
         this.window.setDefaultCloseOperation(window.EXIT_ON_CLOSE);
         this.window.setLayout(null);
         this.window.setSize(850, 640);
         this.window.setResizable(false);
         this.window.setVisible(true);
-
+        
         setCities();
         this.graph = new Graph(this.cities, this.xPlaces, this.yPlaces, this.data.getMatrix());
+        this.calculate.setEnabled(true);
     }
 
     public static void main(String[] args){

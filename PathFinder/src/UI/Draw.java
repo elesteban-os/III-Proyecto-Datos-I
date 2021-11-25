@@ -17,9 +17,10 @@ public class Draw extends JPanel {
      * @param y coordenada y.
      * @param color color del círculo.
      */
-    public void drawCircles(Graphics g, int x, int y, Color color){
+    public void drawCircles(Graphics g, int x, int y, Color color, String name){
         g.setColor(color);
-        g.fillOval(x, y, 10, 10);   
+        g.fillOval(x, y, 10, 10); 
+        g.drawString(name, x, y); 
     }
 
     /**
