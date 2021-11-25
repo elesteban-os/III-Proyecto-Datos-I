@@ -5,6 +5,8 @@ import java.util.LinkedList;
 
 public class Node {
     private City city;
+    private int x;
+    private int y;
     private ArrayList<Edge> edges = new ArrayList<Edge>();
     private LinkedList<Node> path = new LinkedList<Node>();
     private double distance = Double.POSITIVE_INFINITY;
@@ -12,12 +14,13 @@ public class Node {
     /**
      * Constructor that creates a vertex with a city
      * @param city city in this vertex
-     * @param placesOfInterest list of places of interests in this city
-     * @param restaurants list of restaurants in this city
-     * @param gasStations list of gas stations in this city
+     * @param x int for the horizontal position of the node for the interface
+     * @param y int for the vertical position of the node for the interface
      */
-    public Node(City city) {
+    public Node(City city, int x, int y) {
         this.city = city;
+        this.x = x;
+        this.y = y;
     }
 
     /**
@@ -26,6 +29,22 @@ public class Node {
      */
     public City getCity() {
         return this.city;
+    }
+
+    /**
+     * Getter for the horizontal position of the node for the interface
+     * @return int for horizontal position
+     */
+    public int getX() {
+        return this.x;
+    }
+
+    /**
+     * Getter for the vertical position of the node for the interface
+     * @return int for vertical position
+     */
+    public int getY() {
+        return this.y;
     }
 
     /**

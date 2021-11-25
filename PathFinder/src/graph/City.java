@@ -1,13 +1,10 @@
 package graph;
-
-import java.util.ArrayList;
-
 public class City {
     private String name;
-    private int population;
-    private ArrayList<String> placesOfInterest;
-    private ArrayList<String> restaurants;
-    private ArrayList<String> gasStations;
+    private String population;
+    private String placesOfInterest;
+    private String restaurants;
+    private String gasStations;
     private int place;
     
     /**
@@ -17,7 +14,7 @@ public class City {
      * @param restaurants list of restaurants in this city
      * @param gasStations list of gas stations in this city
      */
-    public City(String name, int population, ArrayList<String> placesOfInterest, ArrayList<String> restaurants, ArrayList<String> gasStations) {
+    public City(String name, String population, String placesOfInterest, String restaurants, String gasStations) {
         this.name = name;
         this.population = population;
         this.placesOfInterest = placesOfInterest;
@@ -25,6 +22,7 @@ public class City {
         this.gasStations = gasStations;
         this.setPlace();
     }
+
     /**
      * Getter for the name of the city in this vertex
      * @return name of this city
@@ -34,37 +32,16 @@ public class City {
     }
 
     /**
-     * Getter for the population of the city in this vertex
-     * @return population of this city
+     * Getter for the information of the city in this vertex
+     * @return information of this city
      */
-    public int getPopulation() {
-        return this.population;
+    public String getInfo() {
+        return this.name  + 
+        "\nHabitantes: " + this.population + 
+        "\nLugares de Interés: " + this.placesOfInterest + 
+        "\nRestaurantes: " + this.restaurants + 
+        "\nGasolineras: " + this.gasStations;
     }
-
-    /**
-     * Getter for the places of interest in the city in this vertex
-     * @return places of interest in this city
-     */
-    public ArrayList<String> getPlacesOfInterest() {
-        return this.placesOfInterest;
-    }
-
-    /**
-     * Getter for the restaurants in the city in this vertex
-     * @return restaurants in this city
-     */
-    public ArrayList<String> getRestaurants() {
-        return this.restaurants;
-    }
-
-    /**
-     * Getter for the gas stations in the city in this vertex
-     * @return gas stations in this city
-     */
-    public ArrayList<String> getGasStations() {
-        return this.gasStations;
-    }
-
     
     /**
      * Method to assing a number depending on the letters in the city name of the node 
