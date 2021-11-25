@@ -120,10 +120,17 @@ public class UserInterface extends JFrame{
     }
 
     public UserInterface() {
+        JDialog dlg = new JDialog(this.window, "Cargando");
+        JLabel wait = new JLabel("Cargando Path Finder...");
+        wait.setFont(new Font("Bahnschrift", Font.PLAIN, 20));
+        dlg.add(wait);
+        dlg.setSize(300, 100);
+        dlg.setVisible(true);
         this.setCities();
         this.sortedPlaces = this.sorter.sort(this.cities);
         this.help = new JComboBox<>(sortedPlaces);
         this.graph = new Graph(this.cities, this.xPlaces, this.yPlaces, this.data.getMatrix());
+        dlg.setVisible(false);
 
         // ComboBox
         this.city1.setBounds(10, 120, 150, 30);
