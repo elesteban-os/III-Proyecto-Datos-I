@@ -3,8 +3,6 @@ package UI;
 import java.util.LinkedList;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.*;
 
 import info.Data;
@@ -90,6 +88,7 @@ public class UserInterface extends JFrame{
 
     public void calculateDistance() {
         this.drawResetLines(this.paper.getGraphics());
+        this.graph.resetNodes();
         Node origin = graph.getNode(this.places[this.city1.getSelectedIndex()]);
         Node destiny = graph.getNode(this.places[this.city2.getSelectedIndex()]);
         System.out.println("from: " + origin.getCity().getName() + " to: " + destiny.getCity().getName());
@@ -133,7 +132,6 @@ public class UserInterface extends JFrame{
         // Botones
         this.calculate.setBounds(10, 250, 110, 30);
         this.calculate.addActionListener(action -> this.calculateDistance());
-        this.calculate.setEnabled(false);
 
         this.helpButton.setBounds(10, 460, 150, 30);
         this.helpButton.addActionListener(e -> {
