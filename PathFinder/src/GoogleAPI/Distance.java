@@ -81,8 +81,8 @@ public class Distance {
 
     public static void main(String[] args) throws Exception {
         Distance distance = new Distance();
-        distance.setCity1("Juan+Viñas+Cartago");
-        distance.setCity2("Turrialba+Cartago");
+        distance.setCity1("San+Jose+San+Jose+Costa+Rica");
+        distance.setCity2("Desamparados+San+Jose+Costa+Rica");
 
         String kms = getDistanceData();
         System.out.println(kms);

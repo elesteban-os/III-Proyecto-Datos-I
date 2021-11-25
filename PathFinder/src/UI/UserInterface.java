@@ -27,7 +27,7 @@ public class UserInterface extends JFrame{
     private JButton helpButton = new JButton("Consultar");
     private Draw drawing = new Draw();
     private Data data = new Data();
-    private City[] cities;
+    private City[] cities = new City[15];
     private SpinnerNumberModel modelSpinner = new SpinnerNumberModel(0, 0, 60, 1);
     private JSpinner delay = new JSpinner(modelSpinner);
     private Graph graph;
@@ -43,7 +43,7 @@ public class UserInterface extends JFrame{
     };
     
     private String[] places = {"San José", "Alajuelita", "Escazú", "Desamparados", "Puriscal", "Tarrazú", "Aserrí", "Goicoechea", 
-    "Santa Ana", "Colorado", "Acosta", "Tibás", "Montes de Oca", "Pérez Zeledón", "Curridabat"};
+                               "Santa Ana", "Vázquez de Coronado", "Acosta", "Tibás", "Montes de Oca", "Pérez Zeledón", "Curridabat"};
     //                       1    2    3    4    5    6    7    8    9    10   11   12   13   14   15
     private int[] xPlaces = {205, 246, 230, 284,  98, 286, 245, 320, 204, 340, 185, 262, 286, 440, 290};
     private int[] yPlaces = {149, 175, 159, 187, 251, 327, 247, 127, 150,  91, 247, 126, 142, 439, 152};
@@ -79,7 +79,7 @@ public class UserInterface extends JFrame{
 
     public UserInterface() {
         setCities();
-        this.graph = new Graph(this.cities, this.xPlaces, this.yPlaces, this.data.getMatrix());
+        //this.graph = new Graph(this.cities, this.xPlaces, this.yPlaces, this.data.getMatrix());
 
         // ComboBox
         this.city1.setBounds(10, 120, 150, 30);
@@ -88,6 +88,12 @@ public class UserInterface extends JFrame{
 
         // Botones
         this.calculate.setBounds(10, 250, 110, 30);
+
+        this.helpButton.setBounds(10, 440, 150, 30);
+        this.helpButton.addActionListener(e -> {
+            Graphics g = paper.getGraphics();
+            drawing.drawLines(g, 12, 12, 232, 232, Color.BLACK);
+        });
 
         // Labels
         this.title.setText("PATH FINDER");
@@ -110,6 +116,10 @@ public class UserInterface extends JFrame{
         this.kms.setBounds(10, 320, 100, 40);
         this.kms.setFont(new Font("Bahnschrift", Font.PLAIN, 20));
 
+        this.helpLabel.setText("Ayuda al viajero");
+        this.helpLabel.setBounds(10, 370, 170, 40);
+        this.helpLabel.setFont(new Font("Bahnschrift", Font.PLAIN, 20));
+
         // Paper
         this.paper.setBounds(250, 0, 1000, 720);
 
@@ -124,11 +134,13 @@ public class UserInterface extends JFrame{
         this.window.add(this.delay);
         this.window.add(this.map);
         this.window.add(this.title);
+        this.window.add(this.helpLabel);
         this.window.add(this.kmsTitle);
         this.window.add(this.kms);
         this.window.add(this.origen);
         this.window.add(this.destino);
         this.window.add(this.calculate);
+        this.window.add(this.helpButton);
 
         // Window
         this.window.setDefaultCloseOperation(window.EXIT_ON_CLOSE);
