@@ -33,7 +33,6 @@ public class Distance {
      * @return retorna la distancia entre dos puntos.
      */
     public String getDistance(String json, String searching){
-        System.out.println(json);
         String[] words = json.split(" ");
         int n = 0;
         StringBuilder result = new StringBuilder();

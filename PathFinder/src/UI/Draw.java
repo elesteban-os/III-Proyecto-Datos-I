@@ -20,7 +20,6 @@ public class Draw extends JPanel {
     public void drawCircles(Graphics g, int x, int y, Color color){
         g.setColor(color);
         g.fillOval(x, y, 10, 10);   
-         
     }
 
     /**
@@ -34,7 +33,7 @@ public class Draw extends JPanel {
      */
     public void drawLines(Graphics g, int x1, int y1, int x2, int y2, Color color){
         Graphics2D g2 = (Graphics2D)g;
-        BasicStroke stroke = new BasicStroke(2);
+        BasicStroke stroke = new BasicStroke(3);
         g2.setColor(color);
         g2.setStroke(stroke);
         g2.drawLine(x1, y1, x2, y2);
