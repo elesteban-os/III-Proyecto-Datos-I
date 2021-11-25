@@ -89,6 +89,7 @@ public class UserInterface extends JFrame{
     }
 
     public void calculateDistance() {
+        this.drawResetLines(this.paper.getGraphics());
         Node origin = graph.getNode(this.places[this.city1.getSelectedIndex()]);
         Node destiny = graph.getNode(this.places[this.city2.getSelectedIndex()]);
         System.out.println("from: " + origin.getCity().getName() + " to: " + destiny.getCity().getName());
@@ -204,10 +205,6 @@ public class UserInterface extends JFrame{
         this.window.setSize(850, 640);
         this.window.setResizable(false);
         this.window.setVisible(true);
-        
-        setCities();
-        this.graph = new Graph(this.cities, this.xPlaces, this.yPlaces, this.data.getMatrix());
-        this.calculate.setEnabled(true);
     }
 
     public static void main(String[] args){

@@ -86,7 +86,6 @@ public class City {
                 e += 2;
             }
         }
-        System.out.println(this.name + ":" + this.place);
     }
 
     /**

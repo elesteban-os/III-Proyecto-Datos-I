@@ -19,16 +19,20 @@ public class Dijkstra {
         int times = 0;
         while (unsettledNodes.size() != 0) {
             Node currentNode = getClosestNode(previousNode, unsettledNodes, times);
-            unsettledNodes.remove(currentNode);
-            for (Node adjacentNode : currentNode.getAdjacents()) {
-                if (!settledNodes.contains(adjacentNode)) {
-                    getMinimumDistance(adjacentNode, currentNode);
-                    unsettledNodes.add(adjacentNode);
+            if (!settledNodes.contains(destination)) {
+                unsettledNodes.remove(currentNode);
+                for (Node adjacentNode : currentNode.getAdjacents()) {
+                    if (!settledNodes.contains(adjacentNode)) {
+                        getMinimumDistance(adjacentNode, currentNode);
+                        unsettledNodes.add(adjacentNode);
+                    }
                 }
+                settledNodes.add(currentNode);
+                previousNode = currentNode;
+                times++;
+            } else {
+                unsettledNodes = new ArrayList<Node>();
             }
-            settledNodes.add(currentNode);
-            previousNode = currentNode;
-            times++;
         }
         LinkedList<Node> path = new LinkedList<>();
         for (Node settled : settledNodes) {
