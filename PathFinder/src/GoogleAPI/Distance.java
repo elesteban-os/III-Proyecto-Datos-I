@@ -86,15 +86,4 @@ public class Distance {
         result.append("+San+José+Costa+Rica");
         return String.valueOf(result);
     }
-
-    public static void main(String[] args) throws Exception {
-        Distance distance = new Distance();
-        distance.setCity1("San+Jose+San+Jose+Costa+Rica");
-        distance.setCity2("Desamparados+San+Jose+Costa+Rica");
-
-        String kms = getDistanceData();
-        System.out.println(kms);
-        String distancia = distance.getDistance(kms, "text");
-        double distDou = Double.parseDouble(distancia);
-    }
 }
