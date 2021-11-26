@@ -236,9 +236,4 @@ public class UserInterface extends JFrame{
 
         this.calculate.setEnabled(true);
     }
-
-    public static void main(String[] args){
-        UserInterface user = new UserInterface();
-        System.out.println(user.map.getGraphics());
-    }
 }
