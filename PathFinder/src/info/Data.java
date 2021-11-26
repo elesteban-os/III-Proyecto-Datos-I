@@ -78,18 +78,10 @@ public class Data {
 
     /**
      * Getter for the array containing the populations of different cities
-     * @return array of strings with population 
+     * @return array of strings with populations 
      */
     public String[] getPopulations() {
         return populations;
-    }
-
-    /**
-     * Setter for the array of populations of different cities
-     * @param populations array with strings with populations
-     */
-    public void setPopulation(String[] populations) {
-        this.populations = populations;
     }
 
     /**
@@ -100,14 +92,26 @@ public class Data {
         return matrix;
     }
 
+     /**
+     * Getter for the array containing the gas stations of different cities
+     * @return array of strings with gas stations 
+     */
     public String[] getGasStations() {
         return gasStations;
     }
 
+     /**
+     * Getter for the array containing the restaurants of different cities
+     * @return array of strings with restaurants 
+     */
     public String[] getRestaurants() {
         return restaurants;
     }
 
+     /**
+     * Getter for the array containing the places of interest of different cities
+     * @return array of strings with places of interest 
+     */
     public String[] getSpots() {
         return spots;
     }
