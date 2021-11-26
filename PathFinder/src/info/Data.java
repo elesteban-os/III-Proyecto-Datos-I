@@ -4,7 +4,7 @@ package info;
  * Clase con los datos de los cantones.
  */
 public class Data {
-    private String[] habitants = {"342.188", "89.154", "67.392", "235.863", "33.004", "16.280", 
+    private String[] populations = {"342.188", "89.154", "67.392", "235.863", "33.004", "16.280", 
                                   "61.338", "113.557", "60.453", "68.725", "21.335", "82.216", 
                                   "61.661", "143.117", "77.028"};
 
@@ -76,10 +76,26 @@ public class Data {
                               {0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0}, // 14
                               {0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}; // 15
 
-    public String[] getHabitants() {
-        return habitants;
+    /**
+     * Getter for the array containing the populations of different cities
+     * @return array of strings with population 
+     */
+    public String[] getPopulations() {
+        return populations;
     }
 
+    /**
+     * Setter for the array of populations of different cities
+     * @param populations array with strings with populations
+     */
+    public void setPopulation(String[] populations) {
+        this.populations = populations;
+    }
+
+    /**
+     * Getter for the adjacency matrix for the desired graph
+     * @return adjacency matrix 
+     */
     public int[][] getMatrix() {
         return matrix;
     }

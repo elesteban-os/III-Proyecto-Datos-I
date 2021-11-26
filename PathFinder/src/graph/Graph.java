@@ -51,6 +51,9 @@ public class Graph {
         return result;
     }
 
+    /**
+     * Method to reset the time and path values for the nodes, to check another path
+     */
     public void resetNodes() {
         for (Node node : this.nodes) {
             node.setTime(Double.POSITIVE_INFINITY);

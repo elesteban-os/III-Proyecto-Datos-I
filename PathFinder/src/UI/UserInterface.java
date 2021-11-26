@@ -58,7 +58,9 @@ public class UserInterface extends JFrame{
     private JComboBox<String> city2 = new JComboBox<>(places);
     private JComboBox<String> help;
 
-
+    /**
+     * Method to draw circles for the vertexes of the graph in the desired position
+     */
     public void drawNodes(Graphics g, Color color){
         int len = this.xPlaces.length;
         for (int i = 0; i < len; i++){
@@ -66,6 +68,9 @@ public class UserInterface extends JFrame{
         }
     }
 
+    /**
+     * Method to draw the base edges for the nodes
+     */
     public void drawResetLines(Graphics g){
         int[][] matrix = data.getMatrix();
         for (int i = 0; i < 15; i++){
@@ -76,18 +81,25 @@ public class UserInterface extends JFrame{
             }
         }
     }
-    
+ 
+    /**
+     * Method to save the cities in an array
+     */
     public void setCities(){
-        String[] habitants = this.data.getHabitants();
+        String[] populations = this.data.getPopulations();
         String[] spots = this.data.getSpots();
         String[] restaurants = this.data.getRestaurants();
         String[] gasStations = this.data.getGasStations();
         int len = spots.length;
         for(int i = 0; i < len; i++){
-            this.cities[i] = new City(this.places[i], habitants[i], spots[i], restaurants[i], gasStations[i]);
+            this.cities[i] = new City(this.places[i], populations[i], spots[i], restaurants[i], gasStations[i]);
         }
     }
 
+
+    /**
+     * Method to get and draw the shortest path between two vertexes
+     */
     public void calculateDistance() {
         this.drawResetLines(this.paper.getGraphics());
         this.graph.resetNodes();
@@ -112,6 +124,9 @@ public class UserInterface extends JFrame{
         this.kms.setText((time - expectedDelay.doubleValue() / 60) * 80 + "");
     }
 
+    /**
+     * Method to show the information of a selected city in a prompted window
+     */
     private void openJOptionPane() {
         JOptionPane.showMessageDialog(null, this.graph.getNode(this.sortedPlaces[this.help.getSelectedIndex()]).getCity().getInfo());
     }
