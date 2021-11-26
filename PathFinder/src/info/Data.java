@@ -84,36 +84,17 @@ public class Data {
         return matrix;
     }
 
-    public void setMatrix(int[][] matrix) {
-        this.matrix = matrix;
-    }
-
     public String[] getGasStations() {
         return gasStations;
-    }
-
-    public void setGasStations(String[] gasStations) {
-        this.gasStations = gasStations;
     }
 
     public String[] getRestaurants() {
         return restaurants;
     }
 
-    public void setRestaurants(String[] restaurants) {
-        this.restaurants = restaurants;
-    }
-
     public String[] getSpots() {
         return spots;
     }
 
-    public void setSpots(String[] spots) {
-        this.spots = spots;
-    }
-
-    public void setHabitants(String[] habitants) {
-        this.habitants = habitants;
-    }
     
 }
