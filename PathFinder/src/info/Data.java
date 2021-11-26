@@ -4,7 +4,7 @@ package info;
  * Clase con los datos de los cantones.
  */
 public class Data {
-    private String[] habitants = {"342.188", "89.154", "67.392", "235.863", "33.004", "16.280", 
+    private String[] populations = {"342.188", "89.154", "67.392", "235.863", "33.004", "16.280", 
                                   "61.338", "113.557", "60.453", "68.725", "21.335", "82.216", 
                                   "61.661", "143.117", "77.028"};
 
@@ -76,44 +76,83 @@ public class Data {
                               {0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0}, // 14
                               {0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}; // 15
 
-    public String[] getHabitants() {
-        return habitants;
+    /**
+     * Getter for the array containing the populations of different cities
+     * @return array of strings with population 
+     */
+    public String[] getPopulations() {
+        return populations;
     }
 
+    /**
+     * Setter for the array of populations of different cities
+     * @param populations array with strings with populations
+     */
+    public void setPopulation(String[] populations) {
+        this.populations = populations;
+    }
+
+    /**
+     * Getter for the adjacency matrix for the desired graph
+     * @return adjacency matrix 
+     */
     public int[][] getMatrix() {
         return matrix;
     }
 
+    /**
+     * Setter for the adjacency matrix of a graph
+     * @param matrix adjacency matrix 
+     */
     public void setMatrix(int[][] matrix) {
         this.matrix = matrix;
     }
 
+    /**
+     * Getter for the array containing the gas stations of different cities
+     * @return array of strings with gas stations 
+     */
     public String[] getGasStations() {
         return gasStations;
     }
 
+    /**
+     * Setter for the array of gas stations of different cities
+     * @param gasStations array with strings with gas stations
+     */
     public void setGasStations(String[] gasStations) {
         this.gasStations = gasStations;
     }
 
+    /**
+     * Getter for the array containing the restaurants of different cities
+     * @return array of string with restaurants
+     */
     public String[] getRestaurants() {
         return restaurants;
     }
 
+    /**
+     * Setter for the array of restaurants of different cities
+     * @param restaurants array with strings with restaurants
+     */
     public void setRestaurants(String[] restaurants) {
         this.restaurants = restaurants;
     }
 
+    /**
+     * Getter for the array containing places of interest of different cities
+     * @return array of string with the places of interest
+     */
     public String[] getSpots() {
         return spots;
     }
 
+    /**
+     * Setter for the array of places of interest of different cities
+     * @param spots array with strings with places of interest
+     */
     public void setSpots(String[] spots) {
         this.spots = spots;
-    }
-
-    public void setHabitants(String[] habitants) {
-        this.habitants = habitants;
-    }
-    
+    }    
 }

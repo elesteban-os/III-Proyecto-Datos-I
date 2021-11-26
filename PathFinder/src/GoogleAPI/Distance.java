@@ -71,6 +71,11 @@ public class Distance {
         Distance.city2 = changeName(city2);
     }
 
+    /**
+     * Method to modify the string to the format needed by the API
+     * @param name String to modify
+     * @return String with the format for the API
+     */
     private String changeName(String name) {
         char[] letters = name.toCharArray();
         StringBuilder result = new StringBuilder();
