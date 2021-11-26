@@ -2,6 +2,7 @@ package UI;
 import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.Color;
 import java.awt.BasicStroke;
 
@@ -18,9 +19,11 @@ public class Draw extends JPanel {
      * @param color color del círculo.
      */
     public void drawCircles(Graphics g, int x, int y, Color color, String name){
-        g.setColor(color);
-        g.fillOval(x, y, 10, 10); 
-        g.drawString(name, x, y); 
+        Graphics2D g2 = (Graphics2D)g;
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2.setColor(color);
+        g2.fillOval(x, y, 10, 10); 
+        g2.drawString(name, x, y); 
     }
 
     /**
@@ -34,7 +37,8 @@ public class Draw extends JPanel {
      */
     public void drawLines(Graphics g, int x1, int y1, int x2, int y2, Color color){
         Graphics2D g2 = (Graphics2D)g;
-        BasicStroke stroke = new BasicStroke(3);
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        BasicStroke stroke = new BasicStroke(2);
         g2.setColor(color);
         g2.setStroke(stroke);
         g2.drawLine(x1, y1, x2, y2);
