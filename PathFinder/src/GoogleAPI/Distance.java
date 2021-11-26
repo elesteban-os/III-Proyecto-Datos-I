@@ -5,7 +5,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 /**
- * Clase Distancia.
+ * Clase para el calculo de distancia entre puntos usando API de Google Maps
  */
 public class Distance {
     private static final String API_KEY = "AIzaSyBMLdQm4ZQ217hYicRS4vtukNSCPBuMt4o";

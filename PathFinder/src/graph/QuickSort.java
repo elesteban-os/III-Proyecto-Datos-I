@@ -1,5 +1,8 @@
 package graph;
 
+/**
+ * Class for sorting the cities alphabetically
+ */
 public class QuickSort {
     private City[] cities;
 

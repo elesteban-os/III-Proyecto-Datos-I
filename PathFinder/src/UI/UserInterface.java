@@ -12,6 +12,9 @@ import graph.Graph;
 import graph.Dijkstra;
 import graph.Node;
 
+/**
+ * Class for all the elements of the interface of the application 
+ */
 public class UserInterface extends JFrame{
     
     private JFrame window = new JFrame("Path Finder");
@@ -110,7 +113,7 @@ public class UserInterface extends JFrame{
         int lastX = node.getX();
         int lastY = node.getY();
         Integer expectedDelay =  (int) this.delay.getValue();
-        double time = expectedDelay.doubleValue() / 60;
+        double time = 0;
         while (path.size() != 0) {
             Node currentNode = path.remove();
             int x = currentNode.getX();
@@ -120,8 +123,8 @@ public class UserInterface extends JFrame{
             lastX = x;
             lastY = y;
         }
-        this.time.setText(time + "");
-        this.kms.setText((time - expectedDelay.doubleValue() / 60) * 80 + "");
+        this.kms.setText(time * 80 + "");
+        this.time.setText((time + expectedDelay.doubleValue() / 60) + "");
     }
 
     /**

@@ -6,7 +6,7 @@ import java.awt.Color;
 import java.awt.BasicStroke;
 
 /**
- * 
+ * Clase para dibujar lineas o circulos, requerida par los vertices y aristas
  */
 public class Draw extends JPanel {
 

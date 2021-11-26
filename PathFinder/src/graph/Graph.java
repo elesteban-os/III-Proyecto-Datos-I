@@ -3,6 +3,9 @@ package graph;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+/**
+ * Class for the graph, it creates and contains the graph
+ */
 public class Graph {
     private ArrayList<Node> nodes = new ArrayList<Node>();
     private int[][] adjacents;

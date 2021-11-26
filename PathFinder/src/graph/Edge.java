@@ -2,6 +2,9 @@ package graph;
 
 import GoogleAPI.Distance;
 
+/**
+ * Class for the edges of the graph
+ */
 public class Edge {
     private Node origin;
     private Node destination;

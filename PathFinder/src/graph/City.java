@@ -1,4 +1,8 @@
 package graph;
+
+/**
+ * Class for storing information about the different cities
+ */
 public class City {
     private String name;
     private String population;

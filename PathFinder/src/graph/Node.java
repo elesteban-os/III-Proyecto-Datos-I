@@ -3,6 +3,9 @@ package graph;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+/**
+ * Class for the vertexes of the graph
+ */
 public class Node {
     private City city;
     private int x;

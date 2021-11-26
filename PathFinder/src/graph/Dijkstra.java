@@ -3,6 +3,9 @@ package graph;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+/**
+ * Class with an implementation of the Dijkstra algorithm
+ */
 public class Dijkstra {
     /**
      * Method to get the shortest path from one vertex to another one
